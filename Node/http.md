@@ -29,7 +29,7 @@ server.listen(3000, function(){
 });
 ```
 
->Content-Type对照表参考<http://tool.oschina.net/commons>
+>[Content-Type对照表参考](http://tool.oschina.net/commons)
 
 ## 实现一个简单的Apache服务器
 
