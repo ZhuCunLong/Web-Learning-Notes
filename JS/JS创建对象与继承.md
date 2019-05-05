@@ -1,7 +1,7 @@
 [TOC]
-# 1. JS创建对象（实例）的方法
+# JS创建对象（实例）的方法
 
-## 1.1 工厂模式
+## 工厂模式
 
    ```js
 function Person(name, age, sex){
@@ -19,7 +19,7 @@ var p1 = Person('zcl', 24, 'male');
 
    返回一个对象，但是无法识别具体的对象
 
-## 1.2 构造函数模式
+## 构造函数模式
 
 ```js
 function Person(name, age, sex){
@@ -78,7 +78,7 @@ var p2 = new Person('zcl', 24, 'male');
 
 但是上述的解决方式会污染全局作用域，所以有了第三种方式
 
-## 1.3 原型模式
+## 原型模式
 
 ```js
 function Person(){
@@ -130,7 +130,7 @@ console.log(p3.name); // zyt
 > console.log(p3.hasOwnProperty('name'));//true
 > ```
 
-## 1.4 组合使用构造函数模式和原型模式
+## 组合使用构造函数模式和原型模式
 
 ```js
 function Person(name, age, sex){
@@ -144,7 +144,7 @@ Person.prototype.sayHi = function(){
 var p5 = new Person('zcl', 24, 'male');
 ```
 
-## 1.5 动态原型模式
+## 动态原型模式
 
 ```js
 function Person(name, age, sex){
@@ -161,7 +161,7 @@ function Person(name, age, sex){
 var p6 = new Person('zcl', 24, 'male')
 ```
 
-## 1.6 寄生构造函数模式
+## 寄生构造函数模式
 
 有点类似工厂模式+构造函数模式
 
@@ -180,7 +180,7 @@ function Perosn(name, age, sex){
 var p7 = new Person('zcl', 24, 'male');
 ```
 
-## 1.7 稳妥构造函数模式
+## 稳妥构造函数模式
 
 ```js
 function Perosn(name, age, sex){
@@ -196,9 +196,9 @@ var p7 = new Person('zcl', 24, 'male');
 
 除了调用```sayHi```方法之外没有别的方法能访问```p7```的数据成员
 
-# 2. JS实现继承的方法
+# JS实现继承的方法
 
-## 2.1 原型链继承
+## 原型链继承
 
 ```js
 function SuperType(){
@@ -239,7 +239,7 @@ console.log(son2.colors);//"red,blue,green"
 
 - 在创建子类实例时，无法向父类的构造函数传参，或者说换一种方法，即使能够传参，也会影响所有的子类实例
 
-## 2.2 借用构造函数
+## 借用构造函数
 别名：<span style='color:red'>**伪造对象**</span>或<span style='color:red'>**经典继承**</span>
 
   ```js
@@ -268,7 +268,7 @@ console.log(son2.colors);//"red,blue"
 - 也是构造函数模式存在的问题：函数无法复用
 - 在父类原型中定义的方法，子类不可见，因为子类根本不是父类的实例，子类的原型对象还是子类自身
 
-## 2.3 组合继承
+## 组合继承
 
 别名：**伪经典继承**
 
@@ -303,7 +303,7 @@ console.log(son1 instanceof Father); // true
 - 无论在什么情况下，都会调用两次父类的构造函数
 
 
-## 2.4 原型式继承
+## 原型式继承
 
 ```js
 function object(o){
@@ -335,7 +335,7 @@ console.log(person.friends); // "wly, txf, zyt, lt"
 >
 >p1中原本没有name属性，在定义p1时，name属性只存在p1的原型对象中，但是一旦给p1.name属性赋值，就会覆盖原型属性，而不会直接修改原型属性对象，也就不会修改person对象中name属性的值，但是friends属性不一样，会直接修改原型对象中的friends属性，也就是person的friends属性
 
-## 2.5 寄生式继承
+## 寄生式继承
 
 借用了原型式继承，创建一个仅由于封装继承过程的函数
 
@@ -355,7 +355,7 @@ function createAnother(o){
 
 - 函数无法复用
 
-## 2.6 寄生组合式继承
+## 寄生组合式继承
 
 ```js
 function inheritPrototype(son, father){
