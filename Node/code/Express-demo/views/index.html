@@ -6,7 +6,17 @@
 	<title>学生成绩管理系统</title>
 	<style>
 		.bs-example{
+			width:50%;
 			padding: 20px;
+		}
+		.wrap {
+			width: 150px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+		.mytd{
+			width: 150px;
 		}
 	</style>
 </head>
@@ -26,7 +36,9 @@
 		{{ each students}}
 		<tr>
 			<td>{{ $value.id }}</td>
-			<td>{{ $value.name }}</td>
+			<td class="mytd">
+				<div class="wrap">{{ $value.name }}</div>
+			</td>
 			<td>{{ $value.gender }}</td>
 			<td>{{ $value.age }}</td>
 		</tr>

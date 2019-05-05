@@ -13,9 +13,17 @@ app.use('/node_modules', express.static('../node_modules'))
 
 //app.use('/a/', express.static('./public'))
 
+/*app.use('/',function(req, res, next){
+	console.log(1)
+	next()
+})*/
 app.engine('html', require('express-art-template'))
 
 app.use(router)
+
+app.use(function (req, res) {
+	res.render('404.html')
+})
 
 app.listen(3000, function () {
 	console.log('app is running ...')
