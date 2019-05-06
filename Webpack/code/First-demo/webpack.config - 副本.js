@@ -1,8 +1,13 @@
 let path = require('path')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
-let MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
+	devServer:{ // 开发服务器的配置
+		port:3000,
+		progress:true,
+		contentBase: './build',
+		compress:true
+	},
 	mode: 'development', // 模式 默认两种 production development
 	entry: './src/index.js',
 	output: {
@@ -13,9 +18,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: "index.html",
-		}),
-		new MiniCssExtractPlugin({
-			filename: 'main.css'
+			minify: {    // 压缩html代码
+				removeAttributeQuotes: true,
+				collapseWhitespace: true
+			},
+			hash: true
 		})
 	],
 	module: {
@@ -23,9 +30,13 @@ module.exports = {
 			{
 				test: /\.css$/,
 				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'postcss-loader'
+					{
+						loader:'style-loader',
+						options: {
+							insertAt: 'top'
+						}
+					},
+					'css-loader'
 				]
 			}
 		]
