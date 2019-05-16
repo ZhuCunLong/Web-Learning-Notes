@@ -1,7 +1,7 @@
 <template>
   <div id="wrap">
     <img :src="cat" class="cat" width="64px" height="64px">
-    <div id="bg"/>
+    <div id="bg">{{ message }}</div>
   </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
   name: "Mohu",
   data() {
     return {
-      cat: cat
+      cat: cat,
+      message: 'hello'
     }
   }
 }

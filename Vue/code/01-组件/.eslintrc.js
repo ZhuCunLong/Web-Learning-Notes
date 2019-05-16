@@ -24,11 +24,22 @@ module.exports = {
         "allowFirstLine": false
       }
     }],
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "never",
+        "normal": "never",
+        "component": "always"
+      },
+      "svg": "always",
+      "math": "always"
+    }],
+    'vue/valid-template-root': 0,
     'indent': [2, 2, {
       'SwitchCase': 1
     }],
     'space-before-function-paren': [2, 'never'],
     'generator-star-spacing': 'off',
+    "no-console": "off",
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-mixed-spaces-and-tabs': 2,
   }
