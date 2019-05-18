@@ -1,0 +1,9 @@
+<app-header></app-header>
+<h1>{{title}}</h1>
+<div [title]="title">
+  这里绑定了一个title属性
+</div>
+<div [innerHTML]="content"></div>
+<ol>
+  <li *ngFor="let item of arr">{{ item }}</li>
+</ol>

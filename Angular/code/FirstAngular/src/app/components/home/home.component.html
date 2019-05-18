@@ -1,0 +1,30 @@
+<h3>引入图片</h3>
+<img src="assets/images/123.jpeg" alt="仙剑奇侠传" width="200px"/>
+<hr/>
+<ol>
+  <li *ngFor="let item of arr;let key = index;" [ngClass]="{'red':key==2}">
+    {{ key }}----{{ item }}
+  </li>
+</ol>
+<hr/>
+<h3>ngSwitch</h3>
+<div [ngSwitch]="approvalStatus">
+  <p *ngSwitchCase="0">审核未通过</p>
+  <p *ngSwitchCase="1">审核通过</p>
+  <p *ngSwitchCase="2">待审</p>
+  <p *ngSwitchDefault>无效状态</p>
+</div>
+<hr/>
+<h3>管道</h3>
+<p>这是格式化日期{{ today | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+<p>这是短日期{{ today | date:'shortDate' }}</p>
+<p>这是单日期管道{{ today | date:'fullDate'}}</p>
+<p>这是串联管道{{ today | date:'fullDate' | uppercase }}</p>
+<hr/>
+<h3>事件绑定和事件对象</h3>
+<button (click)="handletest()">测试按钮</button>
+<br/>
+输入框：<input (keyup)="onKeyup($event)"/>
+<br/>
+双向绑定输入框：<input [(ngModel)]="modeltest"/>
+<div>这是双向绑定输入框的内容：{{ modeltest }}</div>

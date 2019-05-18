@@ -18,6 +18,11 @@ export default {
     TextDir,
     mohu,
     stroke
+  },
+  methods: {
+    hell(){
+      console.log('hello')
+    }
   }
 }
 </script>

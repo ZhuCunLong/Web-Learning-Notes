@@ -9,9 +9,9 @@
 export default {
   name: "MyFixed",
   methods:{
-           hellow(){
-        console.log('heelo');
-      }
+    hellow(){
+      console.log('heelo')
+    }
   }
 }
 </script>
