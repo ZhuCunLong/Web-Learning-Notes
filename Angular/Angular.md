@@ -255,3 +255,47 @@ public today: any = new Date();
 Angular提供了自定义管道的方法
 
 >[官方参考](https://angular.cn/guide/pipes)
+
+## 服务
+
+**服务**是一个广义的概念，它包括应用所需的任何值、函数或特性。狭义的服务是一个明确定义了用途的类。它应该做一些具体的事，并做好
+
+> 个人理解：公共工具库utils
+
+### 创建服务
+
+```shell
+ng g service my-new-service
+
+#创建到指定目录下
+ng g service services/xxx
+```
+
+### 引入并配置
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+import { StorageService } from './services/storage.service';//<--- 引入服务
+
+/* @Ngmodule装饰器，@NgModule接收一个元数据对象*/
+@NgModule({
+  declarations: [  /* 配置当前项目运行的组件 */
+    AppComponent, NewsComponent, HomeComponent, HeaderComponent
+  ],
+  imports: [ /* 配置当前模块运行依赖的其他模块 */
+    BrowserModule,
+    AppRoutingModule,
+  ],
+  providers: [StorageService], //<--- 配置服务
+  bootstrap: [AppComponent]
+})
+
+// 根模块不需要导出任何东西， 因为其他组件不需要导入根模块
+export class AppModule { }
+```
+
