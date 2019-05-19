@@ -14,6 +14,8 @@ import { NewsComponent } from './components/news/news.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 
+import { StorageService } from './services/storage.service';
+
 /* @Ngmodule装饰器，@NgModule接收一个元数据对象*/
 @NgModule({
   declarations: [  /* 配置当前项目运行的组件 */
@@ -24,7 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [], /* 配置所需要的服务 */
+  providers: [StorageService], /* 配置所需要的服务 */
   bootstrap: [AppComponent] /* 指定应用的主视图（称为根组件）通过引导根AppModule来启动 */
 })
 
