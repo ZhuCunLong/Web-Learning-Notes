@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +11,14 @@ export class HomeComponent implements OnInit {
   public approvalStatus: number = 3;
   public today: any = new Date();
   public modeltest: string = '默认值';
+  @ViewChild('test') box: any;
+
   constructor() { }
 
   ngOnInit() {
+  }
+  ngAfterViewInit() {
+    console.log(this.box.nativeElement.innerHTML);
   }
   handletest() {
     alert('hello angular');
