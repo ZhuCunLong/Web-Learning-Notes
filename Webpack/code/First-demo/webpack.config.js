@@ -7,7 +7,7 @@ module.exports = {
 	entry: './src/index.js',
 	output: {
 		filename: "main.js",
-		path: path.resolve(__dirname, 'build')
+		path: path.resolve(__dirname, 'dist')
 	},
 	plugins: [ // 数组 放着所有的webpack插件
 		new HtmlWebpackPlugin({

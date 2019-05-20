@@ -1,5 +1,12 @@
 let str = require('./public/js/a.js')
 
-console.log(str)
+function test1() {
+	console.log('这是一个测试函数')
+}
 
-require('./public/css/index.css')
+function test() {
+	return test1;
+}
+
+test()
+
