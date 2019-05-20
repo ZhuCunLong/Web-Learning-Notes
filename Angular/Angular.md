@@ -299,3 +299,36 @@ import { StorageService } from './services/storage.service';//<--- 引入服务
 export class AppModule { }
 ```
 
+## 操作DOM
+
+### 原生js
+
+在`ngOnInit()`钩子函数中可以直接使用`document`对象中dom的相关api，但是不建议在`ngOnInit`中使用原生js操作dom，可能会出现无法访问的情况
+
+```html
+<div id="test">
+  测试dom
+</div>
+
+<div id="test1" *ngIf="flag">
+  测试dom
+</div>
+```
+
+id为`test1`的dom节点无法在`ngOninit()`中获取到
+
+**建议在另一个钩子函数`ngAfterViewInit()`中使用原生js操作dom**，因为`ngAfterViewInit()`的触发时机是视图加载完成
+
+### `ViewChild`
+
+首先给dom节点设置id，设置id的方式和原生不太一样，使用`#`
+
+```html
+<div #test>
+  测试box
+</div>
+```
+
+然后在组件模块中引入angular核心模块中的`ViewChild`
+
+`ViewChild`可以用来获取子组件的实例
