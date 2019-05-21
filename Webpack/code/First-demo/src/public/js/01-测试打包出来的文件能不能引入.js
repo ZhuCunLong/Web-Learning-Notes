@@ -1,4 +1,3 @@
-let test = require('../../../dist/main')
+import { test1 } from '../../../dist/main';
 
-
-console.log(test);
+console.log(test1);
