@@ -1,3 +1,5 @@
+<app-header [title]="title" (msgUp) = "sonsay($event)" (titleUp)="titleUp($event)"></app-header>
+<p>父组件的title：{{ title }}</p>
 <h3>引入图片</h3>
 <img src="assets/images/123.jpeg" alt="仙剑奇侠传" width="200px"/>
 <hr/>

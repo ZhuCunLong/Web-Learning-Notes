@@ -1,5 +1,25 @@
 # Angular
 
+## 创建项目
+
+- 安装node.js
+- 安装`angular/cli`angular手脚架
+
+```shell
+# 全局安装
+npm install -g @angular/cli
+```
+
+- 创建新项目
+
+```shell
+# 直接创建，创建完之后会直接运行npm install安装相关依赖
+ng new xxxx
+
+# 跳过npm i
+ng new xxx --skip-install
+```
+
 ## 目录结构
 
 - 首层目录结构
@@ -10,7 +30,9 @@
 
 ![1558082556753](assets/1558082556753.png)
 
-## 创建组件
+## 组件
+
+### 创建组件
 
 ```shell
 ng g component compoents/xxx
@@ -24,6 +46,137 @@ ng g component compoents/xxx
 - `xxx.component.ts`有点类似组件的js代码
 
 **使用指令创建组件，可以很方便地在根组件中注入新创建的组件**
+
+### 组件通信
+
+#### 父子组件
+
+- 父组件=》子组件
+
+父组件的.html文件和.ts文件
+
+```html
+<!-- .html -->
+<app-header [title]="title"></app-header>
+```
+
+```typescript
+// .ts
+public title: string = '这是父组件的title'
+```
+
+子组件的.html和.ts文件
+
+```html
+<!-- .html -->
+<h1>{{ title }}</h1>
+```
+
+```typescript
+// 从angular的核心模块中引入Input模块
+import { Component, OnInit, Input } from '@angular/core';
+
+// 使用@Input装饰器声明变量title
+@Input() title: any;
+```
+
+以上是传递属性，方法同理，甚至可以直接把整个父组件的对象传递给子组件
+
+- 子组件=》父组件
+
+父组件中引入ViewChild，可以获取整个子组件对象，从而访问子组件的各个属性和方法
+
+```html
+<app-header #head></app-header>
+```
+
+```typescript
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+export class HomeComponent implements OnInit {
+  @ViewChild('head') head: any;
+  constructor() { }
+
+  ngOnInit() {
+  }
+  handletest() {
+    this.head.xxx = 'xxx'
+  }
+}
+```
+
+- 使用广播监听的方式
+
+子组件引入`output`、`EventEmitter`
+
+子组件的.ts
+
+```typescript
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
+})
+export class HeaderComponent implements OnInit {
+
+  @Output() msgUp = new EventEmitter<string>();
+  @Output() titleUp = new EventEmitter();
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  run() {
+    this.msgUp.emit('子组件歪歪歪，父组件收到不用回答');
+  }
+
+  modify() {
+    this.title = '子组件修改值了怎么说';
+    this.titleUp.emit(this.title);
+  }
+}
+```
+
+父组件的.html
+```html
+<app-header [title]="title" (msgUp) = "sonsay($event)" (titleUp)="titleUp($event)"></app-header>
+```
+
+父组件的.ts
+```js
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+  public title: string = '这是home组件的title';
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  sonsay(e) {
+    window.alert(e);
+  }
+
+  titleUp(e) {
+    this.title = e;
+  }
+}
+
+```
+
+> 子组件中修改了父组件传进来的值并不会反过来影响父组件，需要使用EventEmitter的方式将修改传回父组件
+
+#### 非父子组件
+
+- 定义服务，参考[服务](# 服务)
+- 使用`localstorage`和`sessionstorage`
 
 ## 模板语法
 

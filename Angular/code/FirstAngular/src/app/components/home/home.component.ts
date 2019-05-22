@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   public approvalStatus: number = 3;
   public today: any = new Date();
   public modeltest: string = '默认值';
+  public title: string = '这是home组件的title';
   @ViewChild('test') box: any;
 
   constructor() { }
@@ -27,5 +28,13 @@ export class HomeComponent implements OnInit {
     if (e.keyCode === 13) {
       console.log(e.target.value);
     }
+  }
+
+  sonsay(e) {
+    window.alert(e);
+  }
+
+  titleUp(e) {
+    this.title = e;
   }
 }
