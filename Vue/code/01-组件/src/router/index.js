@@ -29,6 +29,11 @@ export default new Router({
       path: '/fixed',
       name: 'fixed',
       component: () => import('@/components/css-learning/MyFixed')
+    },
+    {
+      path: '/todolist',
+      name: 'todolist',
+      component: () => import('@/components/todolist/todolist')
     }
   ]
 })
