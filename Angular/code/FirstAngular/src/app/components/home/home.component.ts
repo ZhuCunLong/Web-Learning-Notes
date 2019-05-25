@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(public service: StorageService) { }
 
   ngOnInit() {
-    this.service.getcallbackData((data) => {
+    /*this.service.getcallbackData((data) => {
       console.log(data)
     })
     this.service.getPromiseData()
@@ -36,13 +36,13 @@ export class HomeComponent implements OnInit {
     }, 1000)
     this.service.getIntervalPromiseData().then((data) => {
       console.log(data);
-    })
+    })*/
     /*this.service.getIntervalRxjsData()
       .subscribe((data) => {
         console.log(data)
       })*/
 
-    this.service.getIntervalRxjsNum()
+   /* this.service.getIntervalRxjsNum()
       .pipe(
         filter((value: number) => {
           return value % 2 === 0
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
       )
       .subscribe((data) => {
         console.log(data)
-      })
+      })*/
   }
   ngAfterViewInit() {
     console.log(this.box.nativeElement.innerHTML)

@@ -132,5 +132,10 @@
       }
     }
   },
-  "defaultProject": "FirstAngular"
+  "defaultProject": "FirstAngular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
