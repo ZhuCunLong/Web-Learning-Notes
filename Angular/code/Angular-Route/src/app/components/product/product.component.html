@@ -1,10 +1,11 @@
-<p>
-  product works!
-</p>
+<div class="content">
+  <div class="left">
+    <a [routerLink]="['/product/pcate']" routerLinkActive="active">商品分类</a>
+    <br>
+    <a [routerLink]="['/product/plist']" routerLinkActive="active">商品列表</a>
+  </div>
+  <div class="right">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
-<br>
-
-<button (click)="OnJump()">js路由跳转</button>
-<br>
-
-<button (click)="goNews()">跳转至新闻</button>

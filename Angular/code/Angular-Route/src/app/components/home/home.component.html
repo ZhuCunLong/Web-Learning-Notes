@@ -1,3 +1,10 @@
-<p>
-  home works!
-</p>
+<div class="content">
+  <div class="left">
+    <a routerLink="/home/welcome" routerLinkActive="active">欢迎首页</a>
+    <br>
+    <a [routerLink]="['/home/setting']" routerLinkActive="active">系统设置</a>
+  </div>
+  <div class="right">
+    <router-outlet></router-outlet>
+  </div>
+</div>
