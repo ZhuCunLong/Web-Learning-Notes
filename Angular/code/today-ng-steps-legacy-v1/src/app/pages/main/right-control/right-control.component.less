@@ -1,0 +1,28 @@
+.right-control {
+  position: relative;
+  height: 100%;
+
+  .header-wrapper {
+    height: 180px;
+    padding: 0;
+    background-color: white;
+  }
+
+  .list-wrapper {
+    overflow: scroll;
+  }
+
+  .quick-add-wrapper {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    width: 400px;
+    transform: translate3d(-50%, 0, 0);
+    transition: 0.2s ease all;
+
+    &.center {
+      bottom: 50%;
+    }
+  }
+}
+
