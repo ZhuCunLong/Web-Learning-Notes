@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>容器的布局方向</title>
+	<title>富裕空间管理（主轴）</title>
 	<style>
 		*{
 			margin: 0;
@@ -13,10 +13,10 @@
 			height: 300px;
 			border: 1px solid;
 			margin: 100px auto;
-			display: -webkit-box;
-			/* 控制主轴是哪一根 */
-			-webkit-box-orient: horizontal;
-			-webkit-box-direction: reverse;
+			display: flex;
+			flex-direction: row;
+
+			justify-content: flex-start;
 		}
 		#wrap .item{
 			width: 50px;
@@ -37,3 +37,4 @@
 </div>
 </body>
 </html>
+

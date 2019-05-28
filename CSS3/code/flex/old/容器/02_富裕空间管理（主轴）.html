@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>容器的布局方向</title>
+	<title>容器的布局方向（主轴）</title>
 	<style>
 		*{
 			margin: 0;
@@ -16,7 +16,14 @@
 			display: -webkit-box;
 			/* 控制主轴是哪一根 */
 			-webkit-box-orient: horizontal;
-			-webkit-box-direction: reverse;
+			/*-webkit-box-direction: reverse;*/
+			/* 取值
+			 * start：富裕空间在右边
+			 * end: 富裕空间在左边
+			 * center: 富裕空间在两边
+			 * justify： 富裕空间在项目之间
+			 * */
+			-webkit-box-pack: center;
 		}
 		#wrap .item{
 			width: 50px;
