@@ -18,6 +18,8 @@ Vue更推荐单向数据流，所以子组件想修改传递的数据，需要�
 
 props一层层传递，爷爷给孙子还好，如果嵌套了五六层还这么写，十分不便，使用一个稍微冷门的API，`provide/indect`，类似React中的上下文，专门用来跨层级提供数据
 
+> 注：只能从高往低传
+
 App.vue
 
 ```html
@@ -370,3 +372,218 @@ export default {
 2. FormItem是怎么知道执行校验的，它是怎么知道Input状态的？它是怎么获得对应数据模型的？
 3. Form是怎么进行全局校验的？它用什么办法把数据模型和校验规则传递给内部组件？
 
+### 实现k-input
+
+v-model是语法糖，实现自定义组件双向绑定需要指定`:value`和`@input`即可,  并且还需要通知父组件
+
+KInput.vue
+
+```html
+<template>
+  <div>
+    <input :type="type" :value="value" @input="onInput">
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      value: {
+        type: String,
+        default: ''
+      },
+      type: {
+        type: String,
+        default: 'text'
+      },
+    },
+    methods: {
+      onInput(e) {
+        // 派发事件，通知父组件输入值变化
+        this.$emit('input', e.target.value)
+
+        // 通知父组件校验
+        this.$parent.$emit('validate')
+      }
+    },
+  }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+```html
+<h1>{{name}}</h1>
+<k-input v-model="name"></k-input>
+```
+
+### 实现k-form-item
+
+1. 预留插槽，扩展input
+2. 能够展示label和校验的错误信息
+3. 能够进行校验
+
+KFormItem.vue
+
+```html
+<template>
+  <div>
+    <label v-if="label">{{label}}</label>
+    <slot></slot>
+    <p v-if="error">{{error}}</p>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      label: {// 输入项标签
+        type: String,
+        default: ''
+      },
+      prop: {// 字段名
+        type: String,
+        default: ''
+      },
+    },
+    data() {
+      return {
+        error: '' // 校验错误
+      }
+    },
+  };
+</script>
+```
+
+```html
+<k-form-item label="用户名">
+  <k-input v-model="name"></k-input>
+</k-form-item>
+```
+
+### 实现k-form
+
+- 给form-item预留槽位
+- 将数据传递给后代便于它们访问数据模型和校验规则
+  - provide && inject
+
+KForm.vue
+
+```html
+<template>
+  <form>
+    <slot></slot>
+  </form>
+</template>
+
+<script>
+export default {
+  provide() {
+    return {
+      form: this // 将组件实例作为提供者，子代组件可方便获取
+    };
+  },
+  props: {
+    model: { type: Object, required: true },
+    rules: { type: Object }
+  }
+};
+</script>
+```
+
+### 数据校验
+
+- 思路：校验发生在FormItem，它需要知道何时校验（让Input通知它），还需要知道怎么校验（注入校验规则）
+
+任务1：Input通知校验
+
+```js
+onInput(e) {
+	// ...
+	// $parent指FormItem
+	this.$parent.$emit('validate');
+}
+```
+
+任务2：FormItem监听校验通知，获取规则并执行校验
+
+```js
+inject: ['form'], // 注入
+mounted(){// 监听校验事件
+  this.$on('validate', this.validate)
+},
+methods: {
+  validate() {
+    // 获取对应FormItem校验规则
+    console.log(this.form.rules[this.prop]);
+    // 获取校验值
+    console.log(this.form.model[this.prop]);
+  }
+},
+```
+
+```js
+import schema from "async-validator";
+
+validate() {
+  // 获取对应FormItem校验规则
+  const rules = this.form.rules[this.prop];
+  // 获取校验值
+  const value = this.form.model[this.prop];
+  // 校验描述对象
+  const descriptor = { [this.prop]: rules };
+  // 创建校验器
+  const schema = new Schema(descriptor);
+  schema.validate({ [this.prop]: value }, errors => {
+    if (errors) {
+      // 将错误信息显示
+      this.error = errors[0].message;
+    } else {
+      // 校验通过
+      this.error = "";
+    }
+  });
+}
+```
+
+任务3：表单全局验证
+
+- 改造FormItem的validate方法，使其可以返回Promise
+
+```js
+validate() {
+  return new Promise((resolve, reject) => {
+    // ...
+    schema.validate({ [this.prop]: value }, errors => {
+      if (errors) {// 校验失败
+        reject()
+      } else { // 校验通过
+        resolve();
+      }
+    });
+  });
+}
+```
+
+为Form提供validate方法
+
+```js
+validate(cb) {
+  // 调用所有含有prop属性的子组件的validate方法并得到Promise数组
+  const tasks = this.$children
+  .filter(item => item.prop)
+  .map(item => item.validate());
+  // 所有任务必须全部成功才算校验通过，任一失败则校验失败
+  Promise.all(tasks)
+    .then(() => cb(true))
+    .catch(() => cb(false));
+}
+```
+
+```html
+<k-form-item>
+	<el-button type="primary" @click="submitForm('kLoginForm')">提交</el-button>
+</k-form-item>
+```
