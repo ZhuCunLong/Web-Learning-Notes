@@ -395,7 +395,7 @@ KInput.vue
       type: {
         type: String,
         default: 'text'
-      },
+      }
     },
     methods: {
       onInput(e) {
