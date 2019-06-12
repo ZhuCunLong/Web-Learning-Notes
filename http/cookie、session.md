@@ -64,9 +64,9 @@ session称为会话信息，位于web服务器上，服务器使用一种类似�
 >
 >```js
 >Session = {
->  SessionID: 'vjFD75aPnrF7C2HmdnV6QZcEbzWoWiBYEnLerjQ99zWpB',
->  name: 'zcl',
->  age: '18'
+>    SessionID: 'vjFD75aPnrF7C2HmdnV6QZcEbzWoWiBYEnLerjQ99zWpB',
+>    name: 'zcl',
+>    age: '18'
 >}
 >```
 
