@@ -1,4 +1,5 @@
-let iterable = {
+// 类数组对象实现for...of遍历
+/*let iterable = {
 	0: 'a',
 	1: 'b',
 	2: 'c',
@@ -25,4 +26,25 @@ let iterable = {
 
 for(let it of iterable){
 	console.log(it);
+}*/
+
+function* objectEntries() {
+	let propKeys = Object.keys(this)
+
+	for (let propKey of propKeys) {
+		yield [propKey, this[propKey]]
+	}
 }
+
+let obj = {
+	first: 'Jane',
+	last: 'Doe',
+	a: 'a',
+	[Symbol.iterator]: objectEntries
+}
+
+for (let [key, value] of obj) {
+	console.log(`${key}: ${value}`);
+}
+// first: Jane
+// last: Doe
