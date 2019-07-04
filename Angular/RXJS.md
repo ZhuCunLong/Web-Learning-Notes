@@ -112,15 +112,15 @@ getIntervalPromiseData().then((data) => {
 
 ```js
 function getIntervalRxjsData() {
-    let count = 0;
-    return new Observable((observer) => {
-      setInterval(() => {
-        count++
-        const data = 'Intervaldata-Rxjs' + count
-        observer.next(data)
-      }, 1000)
-    })
-  }
+  let count = 0;
+  return new Observable((observer) => {
+    setInterval(() => {
+      count++
+      const data = 'Intervaldata-Rxjs' + count
+      observer.next(data)
+    }, 1000)
+  })
+}
 
 getIntervalRxjsData().subscribe((data) => {
   console.log(data)
