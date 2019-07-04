@@ -72,8 +72,6 @@ function* foo(value) {
 	console.log(z);
 }
 
-
-
 function scheduler(task) {
 	// 将task的值迭代使用，获取之后作为下一次next()的参数
 	var taskObj = task.next(task.value);

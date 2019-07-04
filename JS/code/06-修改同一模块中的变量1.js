@@ -5,3 +5,4 @@ console.log(a.foo);
 
 console.log(global._foo);
 console.log(global);
+
