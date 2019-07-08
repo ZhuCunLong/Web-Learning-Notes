@@ -22,13 +22,13 @@ ft(1, 2)(print);*/
 var readFileThunk = thunkify(fs.readFile);
 
 var gen = function* (){
-	var r1 = yield readFileThunk('/data/a');
-	console.log(r1.toString());
-	var r2 = yield readFileThunk('/data/b');
-	console.log(r2.toString());
+	var r1 = yield readFileThunk('./data/a.txt', 'utf-8');
+	console.log(r1);
+	var r2 = yield readFileThunk('./data/b.txt', 'utf-8');
+	console.log(r2);
 };
 
-var g = gen();
+/*var g = gen();
 
 var r1 = g.next();
 r1.value(function (err, data) {
@@ -38,4 +38,19 @@ r1.value(function (err, data) {
 		if (err) throw err;
 		g.next(data);
 	});
-});
+});*/
+
+function run(fn) {
+	var gen = fn();
+
+	let count =0;
+	function next(err, data) {
+		var result = gen.next(data);
+		if (result.done) return;
+		result.value(next);
+	}
+
+	next();
+}
+
+run(gen)

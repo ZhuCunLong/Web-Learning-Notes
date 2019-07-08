@@ -54,7 +54,7 @@ function* foo() {
 
 var it = foo();
 
-console.log(it.next()); // { value:3, done:false }
+console.log(it.next(1)); // { value:3, done:false }
 console.log(it.next(4));
 console.log(it.next(20));*/
 
