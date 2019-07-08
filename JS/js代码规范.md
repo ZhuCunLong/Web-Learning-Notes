@@ -1,6 +1,6 @@
 > [js代码规范参考地址]:<https://standardjs.com/readme-zhcn.html>
 
-## 关于js中的分号
+# 关于js中的分号
 
 有三种情况分号是必不可少的
 

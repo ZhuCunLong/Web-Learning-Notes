@@ -13,8 +13,8 @@ var stu = sdudents.find(function (item){
   return item.id === student.id
 })
 
-for(var key in student){  // for循环中的student简直精髓，为什么不用stu，有原因的，只给想要赋值的
-  stu[key] = student[key]  //属性赋值
+for(var key in student){  // for循环中的student简直精髓，为什么不用stu，有原因的，
+  stu[key] = student[key]  //只给想要赋值的属性赋值
 }
 ```
 
