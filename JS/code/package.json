@@ -2,6 +2,7 @@
   "name": "js-code",
   "version": "1.0.0",
   "dependencies": {
+    "co": "^4.6.0",
     "thunkify": "^2.1.2"
   }
 }
