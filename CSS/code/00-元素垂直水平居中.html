@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>水平居中的几种方式</title>
+</head>
+<head>
+	<style>
+		.center {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 18rem;
+			height: 10rem;
+			margin-left: -9rem;
+			margin-top: -5rem;
+			background: aqua;
+		}
+		div.center1{
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			margin: auto;
+
+		    width: 200px;    /* 一定要设置宽高*/
+			height: 200px;
+			background: green;
+
+		    /*text-align: center;  !* 文字水平居中*!
+			line-height: 100px;
+			box-shadow: inset 10px 10px 10px black;*/
+		}
+		div.center2 {
+			position: absolute;
+			width: 200px;    /* 一定要设置宽高*/
+			height: 200px;
+			background: green;
+			top: calc(50% - 100px);
+			left: calc(50% - 100px);
+		}
+		div.center3 {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			background: brown;
+			transform: translate(-50%, -50%);
+		}
+		div.center4 {
+			margin: auto;
+		}
+		.wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 500px;
+			background: chartreuse;
+		}
+		.item{
+			background: darkslategray;
+			font-size: 40px;
+		}
+
+		.item1{
+			background: cornflowerblue;
+			font-size: 40px;
+		}
+
+		.text-center{
+			background: chartreuse;
+			text-align: center;
+			line-height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<!--<div class="center">hello</div>-->
+	<div style="height: 500px;width: 500px;position: relative;background: aqua">
+		<div class="center1 text-center">hello world</div>
+	</div>
+<!--	<div style="height: 500px;width: 500px;position: relative;background: aqua">
+		<div class="center2"></div>
+	</div>
+	<div style="height: 500px;width: 500px;position: relative;background: fuchsia">
+		<div class="center3">hello css</div>
+	</div>-->
+	<!--<div style="display:flex;background: chartreuse;height: 500px">
+		<div class="center4 item">hello css</div>
+		<div class="center4 item1">hello css1</div>
+	</div>-->
+	<!--<div class="wrapper">
+		<div class="item">hello css</div>
+		<div class="item1">hello css1</div>
+	</div>-->
+	<!--<div class="text-center">
+		hello css
+	</div>-->
+</body>
+</html>
