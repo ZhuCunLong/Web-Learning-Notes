@@ -15,6 +15,8 @@ Foo.prototype.a = function() {
 	console.log(4)
 }*/
 let obj = new Foo();
-obj.__proto__.a()
+/*obj.__proto__.a()
 obj.a();
-Foo.a();
+Foo.a();*/
+
+console.log(obj.prototype)
