@@ -4,7 +4,8 @@ import {SetupComponent} from './pages/setup/setup.component';
 
 const routes: Routes = [
   { path: 'setup', component: SetupComponent },
-  { path: '', redirectTo: '/setup', pathMatch: 'full' }
+  { path: 'main', redirectTo: '/main', pathMatch: 'full' },
+  { path: '', redirectTo: '/main', pathMatch: 'full' }
 ]
 
 @NgModule({

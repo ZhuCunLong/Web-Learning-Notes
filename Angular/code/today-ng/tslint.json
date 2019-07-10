@@ -76,6 +76,9 @@
       false,
       "always"
     ],
-    "prefer-const": false
+    "prefer-const": false,
+    "no-bitwise": false,
+    "only-arrow-functions": false,
+    "variable-name": false
   }
 }

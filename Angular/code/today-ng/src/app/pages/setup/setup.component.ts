@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import {
   USERNAME,
@@ -16,7 +17,8 @@ import { getTodayTime } from '../../../utils/time';
 export class SetupComponent implements OnInit {
   username: string;
 
-  constructor(private store: LocalStorageService) {
+  constructor(private store: LocalStorageService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -26,5 +28,7 @@ export class SetupComponent implements OnInit {
     this.store.set(INIT_FLAG, true);
     this.store.set(START_USING_DATE, getTodayTime());
     this.store.set(USERNAME, this.username);
+
+    this.router.navigateByUrl('main');
   }
 }
