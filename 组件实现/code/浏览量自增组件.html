@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浏览量自增</title>
+	<style>
+		#count{
+			margin-top: 200px;
+			background: chartreuse;
+			height: 200px;
+			font-size: 40px;
+			line-height: 200px;
+			text-align: center;
+		}
+		body{
+			height: 2000px;
+			/*overflow: auto;*/
+		}
+	</style>
+</head>
+<body>
+	<div id="count">浏览量：0</div>
+
+	<script>
+		let obj = {
+			updateTime:null,
+			conut:0,
+			isUpdated: false,  // 是否更新过，更新过不再更新
+			ele:document.getElementById('count'),
+			callback: function () {
+				this.ele.innerText = `浏览量：1`
+				console.log('您已经停留超过2s了')
+			}
+		}
+
+		Object.defineProperty(obj,'isInSight',{
+			get: function () {
+				return this.isInSight
+			},
+			set: function (newValue) {
+				/* 如果已经浏览过没必要更新*/
+				if(this.isUpdated){
+					return
+				}
+				/*如果不在可视化区域,或者首次运行，更新时间*/
+				if(!newValue || !this.updateTime) {
+					this.updateTime = new Date();
+				} else {
+					// 否则计算时间差
+					const difference = new Date() - this.updateTime
+					if(difference>2000){
+						this.callback()
+						this.isUpdated = true
+					}
+				}
+			}
+		})
+		function isInSight2() {
+			var visibleArea = document.documentElement.clientHeight;//屏幕可视区域的高度
+			//console.log(`屏幕可视区域的高度 ${visibleArea}px`)
+			var ele = document.getElementById('count');
+			var eleTop = ele.offsetTop;//元素相对于文档顶部的距离
+			//console.log(`元素相对文档顶部距离 ${eleTop}px`)
+			var scrollTop = document.documentElement.scrollTop;// 获取浏览器窗口顶部距离文档顶部的距离（滚动条滚动的距离）
+			//console.log(`浏览器相对文档顶部距离 ${scrollTop}px`)
+			//return eleTop - scrollTop < visibleArea ? true : false
+
+			return scrollTop <= eleTop && (eleTop + ele.offsetHeight) <= (scrollTop + visibleArea)
+		}
+
+		obj.isInSight = isInSight2();
+		setInterval(()=>{
+			obj.isInSight = isInSight2()
+		});
+	</script>
+</body>
+</html>
