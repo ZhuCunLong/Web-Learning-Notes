@@ -22,6 +22,8 @@ import { QuickAddComponent } from './pages/main/right-control/quick-add/quick-ad
 import { TodoComponent } from './pages/main/right-control/todo/todo.component';
 import { SuggestComponent } from './pages/main/right-control/header/suggest/suggest.component';
 import { DetailComponent } from './pages/main/detail/detail.component';
+import { SummaryModule } from './pages/summary/summary.module';
+import { SettingComponent } from './pages/setting/setting.component';
 
 registerLocaleData(zh);
 
@@ -37,7 +39,8 @@ registerLocaleData(zh);
     QuickAddComponent,
     TodoComponent,
     SuggestComponent,
-    DetailComponent
+    DetailComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ registerLocaleData(zh);
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    MainRoutingModule
+    MainRoutingModule,
+    SummaryModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

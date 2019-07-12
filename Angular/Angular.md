@@ -485,3 +485,88 @@ id为`test1`的dom节点无法在`ngOninit()`中获取到
 然后在组件模块中引入angular核心模块中的`ViewChild`
 
 `ViewChild`可以用来获取子组件的实例
+
+## 动画
+
+### state()函数
+
+定义动画的状态和样式，state()函数包含两个参数
+
+- 状态名称`string`
+- 样式`style()`函数。
+
+`style()`函数用来定义一组与指定的状态名相关的样式
+
+例如一个动画的组成是由状态A的样式转变为状态B的样式
+
+那么状态A的state()函数是这样的
+
+```js
+state('A', style({
+  height: '200px',
+  opacity: 1,
+  backgroundColor: 'yellow'
+}))
+```
+
+### style()函数
+
+`style()`函数用来定义一组与指定的状态名相关的样式
+
+### transition()函数
+
+定义动画转场，接收两个参数
+
+- string 表达式，用来表示转场的方向
+- `animate()`函数，用来定义动画的持续时间、延迟等属性
+
+示例
+
+```js
+transition('open => closed', [
+  animate('0.2s 100ms ease-out')
+])
+```
+
+### animate()函数
+
+`animate()`函数可以接受两类型参数
+
+- timings(三个部分别是持续时间、延迟多长时间开始执行、规定加减速方式) - stirng - 'duration delay easing'
+  - 等待 100 毫秒，运行 200 毫秒。按照减速曲线运动，快速启动并逐渐减速，直到静止：`'0.2s 100ms ease-out'`
+  - 运行 200 毫秒，不等待。按照标准曲线运动，开始很慢，中间加速，最后逐渐减速：`'0.2s ease-in-out'`
+  - 立即开始，运行 200 毫秒。按照加速曲线运动，开始很慢，最后达到全速：`'0.2s ease-in'`
+- 未知，官网未给出示例
+
+###  trigger()函数
+
+动画需要**触发器**，以便知道该在何时开始。
+
+trigger()函数把上文中所有定义的状态、样式、转场等结合在一起，绑定在组件上
+
+示例:
+
+```js
+trigger('openClose', [
+  // ...
+  state('open', style({
+    height: '200px',
+    opacity: 1,
+    backgroundColor: 'yellow'
+  })),
+  state('closed', style({
+    height: '100px',
+    opacity: 0.5,
+    backgroundColor: 'green'
+  })),
+  transition('open => closed', [
+    animate('1s')
+  ]),
+  transition('closed => open', [
+    animate('0.5s')
+  ]),
+]),
+```
+
+
+
