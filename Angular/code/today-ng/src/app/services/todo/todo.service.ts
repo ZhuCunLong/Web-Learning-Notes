@@ -115,4 +115,8 @@ export class TodoService {
     this.rank = r;
     this.rank$.next(r);
   }
+
+  getRaw(): Todo[] {
+    return this.todos;
+  }
 }

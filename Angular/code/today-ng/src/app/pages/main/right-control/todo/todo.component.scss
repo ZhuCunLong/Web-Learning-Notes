@@ -1,5 +1,10 @@
 .todo-item {
   padding-left: 20px;
+  cursor: pointer;
+
+  &:hover{
+    background: #e1e1e1;
+  }
 }
 
 .empty-placeholder {

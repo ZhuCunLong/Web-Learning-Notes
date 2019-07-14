@@ -2,7 +2,8 @@ import {
   Component,
   EventEmitter,
   OnInit,
-  Output
+  Output,
+  HostBinding
 } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -12,13 +13,18 @@ import { TodoService } from '../../../services/todo/todo.service';
 import { Todo } from '../../../../domain/entities';
 import { lessThanADay, floorToDate, getCurrentTime, getTodayTime, floorToMinute } from '../../../../utils/time';
 
+import { detailTransition } from './detail.animation';
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  styleUrls: ['./detail.component.scss'],
+  animations: [ detailTransition ]
 })
 export class DetailComponent implements OnInit {
+  @HostBinding('@detailTransition') state = 'activated';
   @Output() changedTodo = new EventEmitter();
+
   private trueSource: Todo;
   currentTodo: Todo;
   dueDate: Date;
