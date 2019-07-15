@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transition</title>
+	<style>
+		.transition{
+			background: cornflowerblue;
+			width: 100%;
+			height: calc(100% - 1.5em);
+			transform-origin: left;
+			animation: 3s ease-in 1s 2 normal both paused slidein;
+			animation-play-state: running;
+		}
+
+		@keyframes slidein {
+			from { transform: scaleX(0); }
+			to   { transform: scaleX(1); }
+		}
+	</style>
+</head>
+<body>
+	<div class="transition">hello world</div>
+</body>
+</html>
