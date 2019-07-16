@@ -29,7 +29,6 @@ function Person(name, age, sex){
   this.sayHi = function(){
     console.log('hi, I am ' + this.name);
   }
-  return obj;
 }
 var p2 = new Person('zcl', 24, 'male');
 ```
@@ -79,6 +78,14 @@ var p2 = new Person('zcl', 24, 'male');
 但是上述的解决方式会污染全局作用域，所以有了第三种方式
 
 ## 原型模式
+
+### 什么叫原型对象
+
+我们创建的每个函数都有一个prototype属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法
+
+> 注意：prototype是函数特有的属性，实例对象是没有prototype属性的，但是有\_\_proto__属性指向父类函数的prototype属性
+
+### 原型模式实现
 
 ```js
 function Person(){
@@ -196,9 +203,19 @@ var p7 = new Person('zcl', 24, 'male');
 
 除了调用```sayHi```方法之外没有别的方法能访问```p7```的数据成员
 
-# JS实现继承的方法
+# 继承
 
-## 原型链继承
+## 原型链
+
+不谈原型链直接讲继承就是扯犊子
+
+<img src="./assets/原型链.jpg"/>
+
+
+
+## 继承方法
+
+### 原型链继承
 
 ```js
 function SuperType(){
@@ -239,7 +256,7 @@ console.log(son2.colors);//"red,blue,green"
 
 - 在创建子类实例时，无法向父类的构造函数传参，或者说换一种方法，即使能够传参，也会影响所有的子类实例
 
-## 借用构造函数
+### 借用构造函数
 别名：<span style='color:red'>**伪造对象**</span>或<span style='color:red'>**经典继承**</span>
 
   ```js
@@ -268,7 +285,7 @@ console.log(son2.colors);//"red,blue"
 - 也是构造函数模式存在的问题：函数无法复用
 - 在父类原型中定义的方法，子类不可见，因为子类根本不是父类的实例，子类的原型对象还是子类自身
 
-## 组合继承
+### 组合继承
 
 别名：**伪经典继承**
 
@@ -303,7 +320,7 @@ console.log(son1 instanceof Father); // true
 - 无论在什么情况下，都会调用两次父类的构造函数
 
 
-## 原型式继承
+### 原型式继承
 
 ```js
 function object(o){
@@ -335,7 +352,7 @@ console.log(person.friends); // "wly, txf, zyt, lt"
 >
 >p1中原本没有name属性，在定义p1时，name属性只存在p1的原型对象中，但是一旦给p1.name属性赋值，就会覆盖原型属性，而不会直接修改原型属性对象，也就不会修改person对象中name属性的值，但是friends属性不一样，会直接修改原型对象中的friends属性，也就是person的friends属性
 
-## 寄生式继承
+### 寄生式继承
 
 借用了原型式继承，创建一个仅由于封装继承过程的函数
 
@@ -355,7 +372,7 @@ function createAnother(o){
 
 - 函数无法复用
 
-## 寄生组合式继承
+### 寄生组合式继承
 
 ```js
 function inheritPrototype(son, father){

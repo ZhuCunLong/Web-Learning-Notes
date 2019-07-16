@@ -12,13 +12,35 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
 import { FormsModule } from '@angular/forms';
+import { MainComponent } from './pages/main/main.component';
+import { MainRoutingModule} from './pages/main/main-routing.module';
+import { LeftControlComponent } from './pages/main/left-control/left-control.component';
+import { ListComponent } from './pages/main/left-control/list/list.component';
+import { RightControlComponent } from './pages/main/right-control/right-control.component';
+import { HeaderComponent } from './pages/main/right-control/header/header.component';
+import { QuickAddComponent } from './pages/main/right-control/quick-add/quick-add.component';
+import { TodoComponent } from './pages/main/right-control/todo/todo.component';
+import { SuggestComponent } from './pages/main/right-control/header/suggest/suggest.component';
+import { DetailComponent } from './pages/main/detail/detail.component';
+import { SummaryModule } from './pages/summary/summary.module';
+import { SettingComponent } from './pages/setting/setting.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
     AppComponent,
-    SetupComponent
+    SetupComponent,
+    MainComponent,
+    LeftControlComponent,
+    ListComponent,
+    RightControlComponent,
+    HeaderComponent,
+    QuickAddComponent,
+    TodoComponent,
+    SuggestComponent,
+    DetailComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +48,9 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MainRoutingModule,
+    SummaryModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

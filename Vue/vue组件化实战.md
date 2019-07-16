@@ -309,7 +309,7 @@ this.$bus.$on("event-bus",msg=>{
 })
 ```
 
-![eventbus](../../vue-master-lesson/assets/16986e197076b0ba.gif)
+![eventbus](./assets/event-bus.gif)
 
 其实本身Vue就是一个订阅发布的实现，我们偷个懒，把Bus这个类可以删掉，新建一个空的Vue实例就可以啦
 

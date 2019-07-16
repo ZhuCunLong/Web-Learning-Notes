@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#wrap{
+			width: 300px;
+			height: 300px;
+			border: 1px solid;
+			margin: 100px auto;
+			display: flex;
+			/*display: -webkit-box;*/
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			align-content: flex-start;
+			align-items: flex-start;
+		}
+		#wrap .item{
+			/*width: 100px;*/
+			height: 50px;
+			background: pink;
+			text-align: center;
+			line-height: 50px;
+			/*float: left;*/
+		}
+		#wrap .item:nth-child(1), #wrap .item:nth-child(3){
+			flex-basis: 200px;
+			background: aqua;
+		}
+		/*#wrap .item:nth-child(2){
+			flex-grow: 0;
+		}*/
+	</style>
+</head>
+<body>
+<div id = "wrap">
+	<div class="item">1</div>
+	<div class="item">222222</div>
+	<div class="item">3</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transition</title>
+	<style>
+		.transition{
+			background: cornflowerblue;
+			/*transition: background 0.5s step-start;*/
+			transition: 0.5s
+		}
+
+		.transition{
+			background: cornflowerblue;
+			transition: background 1s,color 3s;
+		}
+
+		.transition:hover{
+			background: chartreuse;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="transition">hello world</div>
+</body>
+</html>
