@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		body{
+			height: 500px;
+			background: aqua;
+		}
+	</style>
+</head>
+<body>
+
+<script>
+	document.body.addEventListener('click', () => {
+		Promise.resolve().then(()=>console.log(1));
+		console.log(2)
+	});
+	document.body.addEventListener('click', () => {
+		Promise.resolve().then(()=>console.log(3));
+		console.log(4)
+	});
+</script>
+</body>
+</html>
