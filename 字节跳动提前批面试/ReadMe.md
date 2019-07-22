@@ -62,6 +62,25 @@ function(arr){
 }
 ```
 
+这种做法是不行的，只能保证在1s之后同时打印出数组中的所有元素
+
+正解
+
+```js
+function print2(arr){
+	var i = 0;       //在外面定义一个变量作为判断的标准
+	var timer = setInterval(function(){
+		console.log(arr[i]);
+		i++;
+		if(i > arr.length-1){       
+			clearInterval(timer);
+		}
+	},1000);
+}
+```
+
+
+
 6、判断单链表是否有环
 
 ```js
@@ -237,7 +256,7 @@ const repeatFunc = repeat(alert, 4, 3000);
 
 ```js
 function(func ,times, wait){
-  return function(str){{
+  return function(str){
     for(let i=0;i<times;i++)
       setTimeout(()=>{
         func(str)
@@ -262,6 +281,25 @@ function(func ,times, wait){
 ```
 
 真实效果应该是和我想的不一样，面试官也指出不对
+
+正解
+
+```js
+function fun2(func, times, wait) {
+	return function (str) {
+		let i = 0;
+		const timer = setInterval(() => {
+			i++
+			func(str)
+			if(i === times)
+				clearInterval(timer)
+		}, wait)
+
+	}
+}
+```
+
+> 以后这种类似的需求得用setInervara来做，并且不要使用while或者for之类的循环
 
 - 第八题
 
