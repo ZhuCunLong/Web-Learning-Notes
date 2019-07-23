@@ -193,8 +193,8 @@ getName() // 4
 Foo().getName() //this is window 1
 getName()  // 1
 new Foo.getName() //2
-new Foo().getName() // this is window 1
-new new Foo().getName()
+new Foo().getName() // this is windos 1 纠正 this is object 3
+new new Foo().getName() //  this is object 3
 ```
 
 上面标记了一些答案，有待验证，这题考察的知识点之多，令人发指
