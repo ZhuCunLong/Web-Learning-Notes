@@ -147,7 +147,7 @@ document.body.addEventListener('click', () => {
 
 后来经过面试官的提醒才知道是一个对象绑定了多个事件，我以为会覆盖，改了答案 4 3
 
-（有待验证是否会覆盖）
+正确答案2 1 4 3
 
 这个地方我以为问了宏任务，其实我已经记不清promise和计时器哪个是微任务和宏任务了，就说了个`微任务和宏任务的话有promise和计时器`，然后面试官一听计时器，第四题就来了
 
@@ -212,8 +212,8 @@ getName() // 4
 Foo().getName() //this is window 1
 getName()  // 1
 new Foo.getName() //2
-new Foo().getName() // this is window 1
-new new Foo().getName()
+new Foo().getName() // this is windos 1 纠正 this is object 3
+new new Foo().getName() //  this is object 3
 ```
 
 上面标记了一些答案，有待验证，这题考察的知识点之多，令人发指
