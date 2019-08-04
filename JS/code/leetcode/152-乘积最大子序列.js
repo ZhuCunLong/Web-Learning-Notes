@@ -31,7 +31,7 @@ var maxProduct = function(nums) {
 	return max;
 };
 
-const nums = [2,0,3,-5,-1]
+const nums = [0,0,3,-5,-1]
 
 //console.log(maxProduct(nums))
 
@@ -106,4 +106,23 @@ function getMulti(nums) {
 	},1)
 }
 
+function get(arr) {
+	var newArr = []
+	var num = 1
+	for (let i = 0; i < arr.length; i++) {
+		num = arr[i]
+		for (let j = 0; j < arr.length - i - 1; j++) {
+			num = num * arr[1 + j + i]
+			newArr.push(num)
+		}
+
+	}
+	return newArr.sort(function (a, b) {
+		return b - a
+	})[0] ? newArr.sort(function (a, b) {
+		return b - a
+	})[0] : 0
+}
+
+console.log(get(nums))
 
