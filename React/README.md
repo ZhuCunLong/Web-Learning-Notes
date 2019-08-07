@@ -119,5 +119,98 @@ class Todo extends React.Component {
 
 - jsx嵌套调用
 
+## State
+
+有点类型vue中的data属性
+
+react中是没有双向绑定的，并且，修改state属性中的值不能通过`this.state`直接修改，必须通过setState()方法来进行修改
+
+```jsx
+export calss MyInput extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      input: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
   
+  render(){
+    return (
+      <input onChang={this.handleChange}/>
+    )
+  }
+  
+  handleChange(e){
+    this.setState({
+      input: e.target.value
+    })
+  }
+}
+```
+
+## 组件通信
+
+### 父传子
+
+通过props属性传递
+
+```jsx
+// 父组件
+export default class Father extends React.Component {
+  this.state = {
+    title: '我是你爹'
+  }
+  render(){
+    return (
+      <Son title={this.state.title}/>
+    )
+  }
+}
+// 子组件
+export default class Son extends React.Component {
+  render(){
+    return <p>{this.props.title}</p>
+  }
+}
+```
+
+### 子传父
+
+通过事件传递
+
+```jsx
+// 父组件
+export default class Father extends React.Component {
+  this.state = {
+    title: '我是你爹'
+  }
+  render(){
+    return (
+      <div>
+        {this.state.title}
+      	<Son getTitle={this.handleGetTitle.bind(this)}/>
+      </div>  
+    )
+  }
+
+	handleGetTitle(title) {
+    this.setStete({
+      title: title
+    })
+  }
+}
+
+// 子组件
+export default class Son extends React.Component {
+  
+  render(){
+    return <button onClick={this.onClck.bind(this)}>这是子组件按钮</button>
+  }
+  
+  onClick(){
+    this.props.getTitle('歪歪歪，我是儿子')
+  }
+}
+```
 
