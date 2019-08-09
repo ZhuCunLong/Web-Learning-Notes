@@ -21,3 +21,22 @@ const obj2 = 1
 
 直接报错
 
+## 作用域？
+
+```js
+var a = 1;
+let c = 3;
+const obj = {
+  a: 2,
+  c: 4,
+  b: function(){
+    console.log(this.a)
+    console.log(this.c)
+  }
+}
+const fun = obj.b;
+fun()
+```
+
+> 上面代码在浏览器环境下，测出来的结果是1 undefined，node环境是undefined undefined
+

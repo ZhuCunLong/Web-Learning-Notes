@@ -12,5 +12,5 @@
    1. 每次发请求前，都获取storage里面的token，放在http的header上
    2. 后端接收请求，会校验header，根据你接口是否需要权限
       - 需要权限，token过期，前端跳转
-      - 用户通过，返回useridfo，包含用户名，路有权限表（addRouter)
+      - 用户通过，返回useridfo，包含用户名，路由权限表（addRouter)
 
