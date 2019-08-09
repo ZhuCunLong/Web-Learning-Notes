@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import Button from 'antd/es/button'
+import './index.scss'
 
 interface IProps {
   isFinished: boolean,
@@ -21,14 +23,14 @@ export default class TodoItem extends Component<IProps, IState> {
   render() {
     const {isFinished, title} = this.props
     return (
-      <div>
+      <div className={'todo-item'}>
         <input
           type="checkbox"
           checked={isFinished}
           onChange={this.onClickChange}
         />
         ---{title}---
-        <input type="button" value="删除" onClick={this.handleDelete}/>
+        <Button type="danger" onClick={this.handleDelete} size={'small'}>删除</Button>
       </div>
     )
   }

@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import './index.scss'
 import TodoItem from '../../component/TodoItem'
-import { Button } from 'antd'
+import {Button} from 'antd'
+import {connect} from 'react-redux'
+import {addTodoItemAction} from '../../store/todo/action'
 
 interface Todo {
   title: string,
@@ -9,16 +11,14 @@ interface Todo {
 }
 
 interface IState {
-  todoList: Todo[],
   todo: string
 }
 
-export default class TodoList extends Component<any, IState> {
+class TodoListR extends Component<any, IState> {
 
   constructor(props: any) {
     super(props)
     this.state = {
-      todoList: [],
       todo: ''
     }
   }
@@ -35,7 +35,8 @@ export default class TodoList extends Component<any, IState> {
   )
 
   render() {
-    const {todoList, todo} = this.state
+    const {todoList} = this.props
+    const {todo} = this.state
     return (
       <div className={'center'}>
         <h1>TodoList</h1>
@@ -50,7 +51,7 @@ export default class TodoList extends Component<any, IState> {
         <h2>待完成</h2>
         <div>
           {
-            todoList.map((item, index) => {
+            todoList.map((item: any, index: number) => {
               if (!item.isFinished) {
                 return this.totoItem(index, item)
               }
@@ -60,7 +61,7 @@ export default class TodoList extends Component<any, IState> {
         <h2>已完成</h2>
         <div>
           {
-            this.state.todoList.map((item, index) => {
+            todoList.map((item: any, index: number) => {
               if (item.isFinished) {
                 return this.totoItem(index, item)
               }
@@ -73,31 +74,31 @@ export default class TodoList extends Component<any, IState> {
 
   // 添加按钮点击事件
   onClickAdd = () => {
-    if (this.state.todo.trim() === '') {
-      window.alert('输入不能为空')
-      return
-    }
-    const index = this.state.todoList.findIndex(item => item.title === this.state.todo)
-    if (index === -1) {
-      this.setState({
-        todoList: [...this.state.todoList, {title: this.state.todo, isFinished: false}],
-        todo: ''
-      })
-    } else {
-      window.alert('该事件已添加，请勿重复添加')
-      this.setState({
-        todo: ''
-      })
-    }
+     if (this.state.todo.trim() === '') {
+       window.alert('输入不能为空')
+       return
+     }
+     const index = this.props.todoList.findIndex((item: Todo) => item.title === this.state.todo)
+     if (index === -1) {
+       this.props.addTodo(this.state.todo)
+       this.setState({
+         todo: ''
+       })
+     } else {
+       window.alert('该事件已添加，请勿重复添加')
+       this.setState({
+         todo: ''
+       })
+     }
   }
 
   // checkbox选中状态变换事件
   onClickChange = (index: number) => {
-    const arr = [...this.state.todoList]
-    arr[index].isFinished = !this.state.todoList[index].isFinished
-    this.setState({
-      todoList: arr
-    })
+    /*  const arr = [...this.state.todoList]
+      arr[index].isFinished = !this.state.todoList[index].isFinished
+      this.setState({
+        todoList: arr
+      })*/
   }
 
   // 输入框内容变化事件
@@ -108,11 +109,11 @@ export default class TodoList extends Component<any, IState> {
   }
 
   handleDelete = (index: number) => {
-    const arr = [...this.state.todoList]
-    arr.splice(index, 1)
-    this.setState({
-      todoList: arr
-    })
+    /* const arr = [...this.state.todoList]
+     arr.splice(index, 1)
+     this.setState({
+       todoList: arr
+     })*/
   }
 
   // 按钮单击事件
@@ -122,3 +123,20 @@ export default class TodoList extends Component<any, IState> {
     }
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {
+    todoList: state.todo.todoList
+  }
+}
+
+const mapDispatchToProps = (dipatch: any) => {
+  return {
+    addTodo: (todo: string) => {
+      const action = addTodoItemAction(todo)
+      dipatch(action)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListR)
