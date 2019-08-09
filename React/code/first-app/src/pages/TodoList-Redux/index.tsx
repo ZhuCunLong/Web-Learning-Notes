@@ -3,7 +3,7 @@ import './index.scss'
 import TodoItem from '../../component/TodoItem'
 import {Button} from 'antd'
 import {connect} from 'react-redux'
-import {addTodoItemAction, toggleTodoAction} from '../../store/todo/action'
+import {addTodoItemAction, toggleTodoAction , deleteTodoAction} from '../../store/todo/action'
 
 interface Todo {
   title: string,
@@ -94,11 +94,7 @@ class TodoListR extends Component<any, IState> {
 
   // checkbox选中状态变换事件
   onClickChange = (index: number) => {
-    /*  const arr = [...this.state.todoList]
-      arr[index].isFinished = !this.state.todoList[index].isFinished
-      this.setState({
-        todoList: arr
-      })*/
+    this.props.toggleTodo(index)
   }
 
   // 输入框内容变化事件
@@ -109,11 +105,7 @@ class TodoListR extends Component<any, IState> {
   }
 
   handleDelete = (index: number) => {
-    /* const arr = [...this.state.todoList]
-     arr.splice(index, 1)
-     this.setState({
-       todoList: arr
-     })*/
+    this.props.deleteTodo(index)
   }
 
   // 按钮单击事件
@@ -136,8 +128,13 @@ const mapDispatchToProps = (dipatch: any) => {
       const action = addTodoItemAction(todo)
       dipatch(action)
     },
-    deleteTodo: (index: number) => {
+    toggleTodo: (index: number) => {
       const action = toggleTodoAction(index)
+      dipatch(action)
+    },
+    deleteTodo: (index: number) => {
+      const action = deleteTodoAction(index)
+      dipatch(action)
     }
   }
 }

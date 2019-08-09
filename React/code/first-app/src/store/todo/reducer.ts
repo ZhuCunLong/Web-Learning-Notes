@@ -1,4 +1,4 @@
-import {TodoActionTypes, ADDTODO, TOGGLETODO, ITodoList} from '../types'
+import {TodoActionTypes, ADDTODO, TOGGLETODO, DELETETODO, ITodoList} from './types'
 import {Reducer} from 'redux'
 
 const initialState: ITodoList = {
@@ -23,11 +23,16 @@ export const todoReducer: Reducer<ITodoList, TodoActionTypes> = (state = initial
         todoList: arr
       }
     case TOGGLETODO:
-      const arr1 = state.todoList.map((item: any, index: number) =>
-        index === action.index ? item.isFinished = !item.isFinished : item
-      )
+      const arr1 = [...state.todoList]
+      arr1[action.index].isFinished = !arr1[action.index].isFinished
       return {
         todoList: arr1
+      }
+    case DELETETODO:
+      const arr2 = [...state.todoList]
+      arr2.splice(action.index, 1)
+      return {
+        todoList: arr2
       }
     default:
       return state

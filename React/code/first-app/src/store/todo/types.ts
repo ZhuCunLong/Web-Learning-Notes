@@ -1,5 +1,6 @@
 export const ADDTODO = 'ADDTODO'
 export const TOGGLETODO = 'TOGGLETODO'
+export const DELETETODO = 'DELETETODO'
 
 interface IAddAction {
   type: typeof ADDTODO,
@@ -11,7 +12,12 @@ interface IToggleAction {
   index: number
 }
 
-export type TodoActionTypes = IAddAction | IToggleAction
+interface IDeleteAction {
+  type: typeof DELETETODO,
+  index: number
+}
+
+export type TodoActionTypes = IAddAction | IToggleAction | IDeleteAction
 
 // state类型
 export interface ITodo {
