@@ -22,13 +22,6 @@ export const todoReducer: Reducer<ITodoList, TodoActionTypes> = (state = initial
       return {
         todoList: arr
       }
-      /*return [
-        [...(state.todolist)],
-        {
-          title: action.title,
-          isFinished: false
-        }
-      ]*/
     case TOGGLETODO:
       const arr1 = state.todoList.map((item: any, index: number) =>
         index === action.index ? item.isFinished = !item.isFinished : item

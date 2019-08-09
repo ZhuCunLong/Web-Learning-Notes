@@ -11,7 +11,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        {/*<div className={'menu'}>
+        <div className={'menu'}>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -23,8 +23,7 @@ function App() {
               <Link to="/todolist_radux">TodoList-redux</Link>
             </li>
           </ul>
-        </div>*/}
-        <TodoListR />
+        </div>
         <Route exact path="/" component={Home}/>
         <Route exact path="/todolist" component={TodoList}/>
         <Route exact path="/todolist_radux" component={TodoListR}/>

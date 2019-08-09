@@ -5,7 +5,7 @@ export const addTodoItemAction = (title: string) => ({
   title
 })
 
-export const toggleTodoAction = (isFinished: boolean) => ({
+export const toggleTodoAction = (index: number) => ({
   type: TOGGLETODO,
-  isFinished
+  index
 })

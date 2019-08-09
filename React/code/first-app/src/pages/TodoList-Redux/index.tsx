@@ -3,7 +3,7 @@ import './index.scss'
 import TodoItem from '../../component/TodoItem'
 import {Button} from 'antd'
 import {connect} from 'react-redux'
-import {addTodoItemAction} from '../../store/todo/action'
+import {addTodoItemAction, toggleTodoAction} from '../../store/todo/action'
 
 interface Todo {
   title: string,
@@ -135,6 +135,9 @@ const mapDispatchToProps = (dipatch: any) => {
     addTodo: (todo: string) => {
       const action = addTodoItemAction(todo)
       dipatch(action)
+    },
+    deleteTodo: (index: number) => {
+      const action = toggleTodoAction(index)
     }
   }
 }
