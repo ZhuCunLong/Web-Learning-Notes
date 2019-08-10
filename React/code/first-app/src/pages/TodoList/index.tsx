@@ -50,6 +50,7 @@ export default class TodoList extends Component<any, IState> {
         <h2>待完成</h2>
         <div>
           {
+            // eslint-disable-next-line
             todoList.map((item, index) => {
               if (!item.isFinished) {
                 return this.totoItem(index, item)
@@ -60,6 +61,7 @@ export default class TodoList extends Component<any, IState> {
         <h2>已完成</h2>
         <div>
           {
+            // eslint-disable-next-line
             this.state.todoList.map((item, index) => {
               if (item.isFinished) {
                 return this.totoItem(index, item)

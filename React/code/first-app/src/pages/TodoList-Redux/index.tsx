@@ -14,7 +14,14 @@ interface IState {
   todo: string
 }
 
-class TodoListR extends Component<any, IState> {
+interface IProps {
+  todoList: Todo[],
+  addTodo: (todo: string) => void,
+  toggleTodo: (index: number) => void,
+  deleteTodo: (index: number) => void
+}
+
+class TodoListR extends Component<IProps, IState> {
 
   constructor(props: any) {
     super(props)
@@ -51,6 +58,7 @@ class TodoListR extends Component<any, IState> {
         <h2>待完成</h2>
         <div>
           {
+            // eslint-disable-next-line
             todoList.map((item: any, index: number) => {
               if (!item.isFinished) {
                 return this.totoItem(index, item)
@@ -61,6 +69,7 @@ class TodoListR extends Component<any, IState> {
         <h2>已完成</h2>
         <div>
           {
+            // eslint-disable-next-line
             todoList.map((item: any, index: number) => {
               if (item.isFinished) {
                 return this.totoItem(index, item)
@@ -118,7 +127,7 @@ class TodoListR extends Component<any, IState> {
 
 const mapStateToProps = (state: any) => {
   return {
-    todoList: state.todo.todoList
+    todoList: state.todo
   }
 }
 
