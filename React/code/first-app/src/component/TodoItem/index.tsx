@@ -42,4 +42,5 @@ export default class TodoItem extends Component<IProps, IState> {
   handleDelete() {
     this.props.handleDelte(this.props.index)
   }
+
 }

@@ -24,6 +24,7 @@
     "no-require-imports": false,
     "no-submodule-imports": false,
     "no-this-assignment": [true, { "allow-destructuring": true }],
+    "no-var-requires": false,
     "no-trailing-whitespace": false,
     "object-literal-sort-keys": false,
     "object-literal-shorthand": false,
