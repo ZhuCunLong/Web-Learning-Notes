@@ -1,6 +1,13 @@
 export const ADDTODO = 'ADDTODO'
 export const TOGGLETODO = 'TOGGLETODO'
 export const DELETETODO = 'DELETETODO'
+export const GETALLITEM = 'GETALLITEM'
+
+// state类型
+export interface ITodo {
+  title: string,
+  isFinished: boolean
+}
 
 interface IAddAction {
   type: typeof ADDTODO,
@@ -18,13 +25,3 @@ interface IDeleteAction {
 }
 
 export type TodoActionTypes = IAddAction | IToggleAction | IDeleteAction
-
-// state类型
-export interface ITodo {
-  title: string,
-  isFinished: boolean
-}
-
-export interface ITodoList {
-  todoList: ITodo[]
-}

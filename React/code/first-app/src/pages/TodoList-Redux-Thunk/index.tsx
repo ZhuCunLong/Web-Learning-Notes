@@ -3,7 +3,8 @@ import './index.scss'
 import TodoItem from '../../component/TodoItem'
 import {Button} from 'antd'
 import {connect} from 'react-redux'
-import {addTodoItemAction, toggleTodoAction, deleteTodoAction} from '../../store/todo/action'
+// import {addTodoItemAction, toggleTodoAction, deleteTodoAction, getAllItemsAction} from '../../store/todo-thunk/action'
+import {getAllItemsAction} from '../../store/todo-thunk/action'
 import {ITodo} from '../../store/todo/types'
 
 interface IState {
@@ -15,9 +16,10 @@ interface IProps {
   addTodo: (todo: string) => void,
   toggleTodo: (index: number) => void,
   deleteTodo: (index: number) => void
+  getAllTodoItem: () => void
 }
 
-class TodoListR extends Component<IProps, IState> {
+class TodoListRT extends Component<IProps, IState> {
 
   constructor(props: any) {
     super(props)
@@ -27,7 +29,7 @@ class TodoListR extends Component<IProps, IState> {
   }
 
   componentDidMount(): void {
-    // this.props.getAllTodoItem()
+    this.props.getAllTodoItem()
   }
 
   public totoItem = (index: number, item: ITodo) => (
@@ -127,13 +129,17 @@ class TodoListR extends Component<IProps, IState> {
 
 const mapStateToProps = (state: any) => {
   return {
-    todoList: state.todo
+    todoList: state.todot
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addTodo: (todo: string) => {
+    getAllTodoItem: () => {
+      const action = getAllItemsAction()
+      dispatch(action)
+    },
+    /*addTodo: (todo: string) => {
       const action = addTodoItemAction(todo)
       dispatch(action)
     },
@@ -144,8 +150,8 @@ const mapDispatchToProps = (dispatch: any) => {
     deleteTodo: (index: number) => {
       const action = deleteTodoAction(index)
       dispatch(action)
-    }
+    }*/
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoListR)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListRT)

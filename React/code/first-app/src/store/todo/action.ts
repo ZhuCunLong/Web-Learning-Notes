@@ -1,4 +1,4 @@
-import {ADDTODO, TOGGLETODO, DELETETODO} from './types'
+import {ADDTODO, TOGGLETODO, DELETETODO, /*ITodo,*/GETALLITEM} from './types'
 
 export const addTodoItemAction = (title: string) => ({
   type: ADDTODO,

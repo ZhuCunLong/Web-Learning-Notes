@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import TodoList from './pages/TodoList'
 import {Provider} from 'react-redux'
 import TodoListR from './pages/TodoList-Redux'
+import TodoListRT from './pages/TodoList-Redux-Thunk'
 import store from './store'
 
 function App() {
@@ -20,13 +21,17 @@ function App() {
               <Link to="/todolist">TodoList</Link>
             </li>
             <li>
-              <Link to="/todolist_radux">TodoList-redux</Link>
+              <Link to="/todolist_redux">TodoList-redux</Link>
+            </li>
+            <li>
+              <Link to="/todolist_thunk">TodoList-redux</Link>
             </li>
           </ul>
         </div>
         <Route exact path="/" component={Home}/>
         <Route exact path="/todolist" component={TodoList}/>
-        <Route exact path="/todolist_radux" component={TodoListR}/>
+        <Route exact path="/todolist_redux" component={TodoListR}/>
+        <Route exact path="/todolist_thunk" component={TodoListRT}/>
       </Router>
     </Provider>
   )

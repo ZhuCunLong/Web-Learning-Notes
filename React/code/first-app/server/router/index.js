@@ -8,14 +8,16 @@ router.get('/', (ctx, next) => {
   ctx.body = 'hello koa'
 })
 
-router.get('/todo/add', async (ctx, next) => {
+router.post('/todo/add', async (ctx, next) => {
 	let data
 	try{
-		data = await services.addTodo('吃饭')
+		const title = ctx.request.body.title
+		data = await services.addTodo(title)
 	} catch (e) {
+		ctx.response.status = e.status || 500
 		data = {
-			code: 0,
-			msg: e
+			status: 0,
+			msg: e.message
 		}
 	}
 	ctx.body = data
@@ -24,10 +26,9 @@ router.get('/todo/add', async (ctx, next) => {
 router.get('/todo/list', async (ctx, next) => {
 	let data
 	try{
-		data = {
-			data: await services.getTodoList()
-		}
+		data = await services.getTodoList()
 	} catch (e) {
+		ctx.response.status = 500
 		data = {
 			code: 0,
 			msg: '获取列表失败'
