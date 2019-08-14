@@ -17,12 +17,12 @@ interface IAddAction {
 
 interface IToggleAction {
   type: typeof TOGGLE_TODO,
-  index: number
+  todos: ITodo[]
 }
 
 interface IDeleteAction {
   type: typeof DELETE_TODO,
-  index: number
+  title: number
 }
 
 export type TodoActionTypes = IAddAction | IToggleAction | IDeleteAction | IGetAllAction

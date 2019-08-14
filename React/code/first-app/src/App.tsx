@@ -24,7 +24,7 @@ function App() {
               <Link to="/todolist_redux">TodoList-redux</Link>
             </li>
             <li>
-              <Link to="/todolist_thunk">TodoList-redux</Link>
+              <Link to="/todolist_thunk">TodoList-thunk</Link>
             </li>
           </ul>
         </div>

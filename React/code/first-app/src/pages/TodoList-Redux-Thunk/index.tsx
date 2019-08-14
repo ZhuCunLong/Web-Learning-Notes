@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import './index.scss'
-import TodoItem from '../../component/TodoItem'
+import TodoItem from '../../component/TodoItemRT'
 import {Button} from 'antd'
 import {connect} from 'react-redux'
-// import {addTodoItemAction, toggleTodoAction, deleteTodoAction, getAllItemsAction} from '../../store/todo-thunk/action'
-import {getAllItemsAction} from '../../store/todo-thunk/action'
+import {getAllItemsAction, addTodoItemAction} from '../../store/todo-thunk/action'
 import {ITodo} from '../../store/todo/types'
 
 interface IState {
@@ -15,7 +14,7 @@ interface IProps {
   todoList: ITodo[],
   addTodo: (todo: string) => void,
   toggleTodo: (index: number) => void,
-  deleteTodo: (index: number) => void
+  deleteTodo: (title: string) => void
   getAllTodoItem: () => void
 }
 
@@ -38,8 +37,6 @@ class TodoListRT extends Component<IProps, IState> {
       isFinished={item.isFinished}
       index={index}
       title={item.title}
-      handleChange={this.onClickChange}
-      handleDelte={this.handleDelete}
     />
   )
 
@@ -85,22 +82,14 @@ class TodoListRT extends Component<IProps, IState> {
 
   // 添加按钮点击事件
   onClickAdd = () => {
-     if (this.state.todo.trim() === '') {
-       window.alert('输入不能为空')
-       return
-     }
-     const index = this.props.todoList.findIndex((item: ITodo) => item.title === this.state.todo)
-     if (index === -1) {
-       this.props.addTodo(this.state.todo)
-       this.setState({
-         todo: ''
-       })
-     } else {
-       window.alert('该事件已添加，请勿重复添加')
-       this.setState({
-         todo: ''
-       })
-     }
+    if (this.state.todo.trim() === '') {
+      window.alert('输入不能为空')
+      return
+    }
+    this.props.addTodo(this.state.todo)
+    this.setState({
+      todo: ''
+    })
   }
 
   // checkbox选中状态变换事件
@@ -115,8 +104,8 @@ class TodoListRT extends Component<IProps, IState> {
     })
   }
 
-  handleDelete = (index: number) => {
-    this.props.deleteTodo(index)
+  handleDelete = (title: string) => {
+    this.props.deleteTodo(title)
   }
 
   // 按钮单击事件
@@ -139,18 +128,10 @@ const mapDispatchToProps = (dispatch: any) => {
       const action = getAllItemsAction()
       dispatch(action)
     },
-    /*addTodo: (todo: string) => {
+    addTodo: (todo: string) => {
       const action = addTodoItemAction(todo)
       dispatch(action)
     },
-    toggleTodo: (index: number) => {
-      const action = toggleTodoAction(index)
-      dispatch(action)
-    },
-    deleteTodo: (index: number) => {
-      const action = deleteTodoAction(index)
-      dispatch(action)
-    }*/
   }
 }
 

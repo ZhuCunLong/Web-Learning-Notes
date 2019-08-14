@@ -1,6 +1,5 @@
-import {ADD_TODO, TOGGLE_TODO, DELETE_TODO, GET_ALL_ITEM} from './types'
-import {getTodoList, addTodo} from '../../api/todo'
-import {ITodo} from '../todo/types'
+import {ADD_TODO, GET_ALL_ITEM, TOGGLE_TODO} from './types'
+import {getTodoList, addTodo, deleteTodo, toggleTodo} from '../../api/todo'
 import {message} from 'antd'
 
 export const getAllItemsAction = () => {
@@ -25,7 +24,7 @@ export const addTodoItemAction = (title: string) => {
           type: ADD_TODO,
           title
         })
-        console.log('success: ' + res.msg)
+        message.success(res.msg)
       } else {
         message.error(res.msg)
       }
@@ -33,24 +32,35 @@ export const addTodoItemAction = (title: string) => {
   }
 }
 
-/*
-export const getAllItemsAction = (todos: ITodo[]) => ({
-  type: GETALLITEM,
-  todos
-})
-*/
+export const deleteTodoItemAction = (title: string) => {
+  return (dispatch: any) => {
+    const params = {title}
+    deleteTodo(params).then((res: any) => {
+      if (res.status === 1) {
+        dispatch({
+          type: GET_ALL_ITEM,
+          todos: res.data
+        })
+        message.success(res.msg)
+      } else {
+        message.error(res.msg)
+      }
+    })
+  }
+}
 
-/*export const addTodoItemAction = (title: string) => ({
-  type: ADDTODO,
-  title
-})
-
-export const toggleTodoAction = (index: number) => ({
-  type: TOGGLETODO,
-  index
-})
-
-export const deleteTodoAction = (index: number) => ({
-  type: DELETETODO,
-  index
-})*/
+export const toggleTodoAction = (title: string, isFinished: boolean) => {
+  return async (dispatch: any) => {
+    const params = {title, isFinished}
+    const {status, data, msg}: any = await toggleTodo(params)
+    if (status === 1) {
+      dispatch({
+        type: TOGGLE_TODO,
+        todos: data
+      })
+      // message.success(msg)
+    } else {
+      message.error(msg)
+    }
+  }
+}

@@ -8,10 +8,26 @@ export const getTodoList = async () => {
   })
 }
 
-export const addTodo = async (params: ITodo) => {
+export const addTodo = async (data: ITodo) => {
   return request({
-    url: 'api/todo/add',
-    method: 'get',
-    params
+    url: '/api/todo/add',
+    method: 'post',
+    data
+  })
+}
+
+export const deleteTodo = async (data: { title: string }) => {
+  return request({
+    url: '/api/todo/delete',
+    method: 'post',
+    data
+  })
+}
+
+export const toggleTodo = async (data: { title: string}) => {
+  return request({
+    url: '/api/todo/toggle',
+    method: 'post',
+    data
   })
 }
