@@ -1,12 +1,12 @@
 var a = 0
 let obj = {
-    a: 1,
-    b: function () {
-        console.log(this.a)
-    }
+  a: 1,
+  b: function () {
+    console.log(this.a)
+  }
 }
 const obj1 = {
-    a: 2
+  a: 2
 }
 const fun = obj.b;
 fun();  // 0
@@ -38,5 +38,5 @@ function Foo () {
     }
     console.log('this is' + this)
     return this
-}
+}*/
 
