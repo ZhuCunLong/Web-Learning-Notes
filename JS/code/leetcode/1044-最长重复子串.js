@@ -26,7 +26,7 @@ var longestDupSubstring = function(S) {
 	return maxStr;
 };
 
-const str = "banana"
+const str = "abcd"
 console.log(longestDupSubstring(str))
 
 
