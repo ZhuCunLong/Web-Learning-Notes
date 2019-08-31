@@ -280,7 +280,7 @@ function addTodo(text) {
 const action = addTodo('Learn Redux');
 ```
 
-### 工作流
+## 工作流
 
 ### store.dispatch()
 
@@ -304,7 +304,7 @@ store.dispatch({
 store.dispatch(addTodo('Learn Redux'));
 ```
 
-#### Reducer
+### Reducer
 
 store.dispatch()只是发出更新state的申请，实际更新state中的值还需要依赖Reducer
 
@@ -363,7 +363,7 @@ const total = actions.reduce(reducer, 0); // 3
 
 > 这里的store中只存放了一个数值类型，其实可以是一个具体的对象，包含各种key-value
 
-##### 纯函数
+#### 纯函数
 
 Reducer 函数最重要的特征是，它是一个纯函数。也就是说，只要是同样的输入，必定得到同样的输出。
 
@@ -391,7 +391,7 @@ function reducer(state, action) {
 
 最好把 State 对象设成只读。你没法改变它，要得到新的 State，唯一办法就是生成一个新对象。这样的好处是，任何时候，与某个 View 对应的 State 总是一个不变的对象。
 
-#### store.subscribe()
+### store.subscribe()
 
 Store 允许使用`store.subscribe`方法设置监听函数，一旦 State 发生变化，就自动执行这个函数。
 
@@ -409,7 +409,7 @@ unsubscribe();
 
 这个方法用来更新视图
 
-#### 总结
+### 总结
 
 ![img](assets/bg2016091802.jpg)
 
