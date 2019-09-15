@@ -17,7 +17,7 @@
   	f:function () {
   		console.log('hi f')
   	},
-  	[zcl]:'i am zcl'
+  	[zcl]:'i am zcl'  // symbol作为键值
   }
   
   Object.defineProperty(obj, 'g', {
