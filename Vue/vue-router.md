@@ -14,3 +14,12 @@
       - 需要权限，token过期，前端跳转
       - 用户通过，返回useridfo，包含用户名，路由权限表（addRouter)
 
+## 实现原理
+
+### hash模式
+
+通过hashchange事件来监听URL的变化，从而进行跳转页面
+
+### history模式
+
+通过h5提供的api，popstate（回退），pushstate（前进），replacestate(刷新)
