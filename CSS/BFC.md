@@ -36,3 +36,4 @@ BFC(Block formatting context)直译为"块级格式化上下文"。它是一个�
 -  position为absolute或fixed
 -  display为inline-block, table-cell, table-caption, flex, inline-flex
 -  overflow不为visible
+
