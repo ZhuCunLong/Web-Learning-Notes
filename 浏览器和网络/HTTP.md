@@ -156,6 +156,8 @@ HTTP/2.0 里的每个 stream 都可以设置依赖 (Dependency) 和权重，可�
 
 ### HTTP+加密+认证+完整性保护=HTTPS
 
+HTTP+SSL(TLS)=HTTPS
+
 - 加密方式
   - HTTP采用对称秘钥和非对称秘钥的混合加密方式
 - 证书
