@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件模型</title>
+</head>
+<body>
+<div>
+	<div id="mydiv">
+		<button id="mybutton">添加</button>
+	</div>
+</div>
+</body>
+<script>
+	const hbtn = document.getElementById('mybutton');
+	hbtn.onclick = function () {
+		alert('这是onclik事件')
+	}
+	hbtn.addEventListener('click',function (event) {
+		alert('hello world');
+		console.log(event.eventPhase)
+		//console.log('button:' + event.cancelable);
+	},true);
+
+	const hdiv = document.getElementById('mydiv');
+	hdiv.addEventListener('click',function (event) {
+		alert(this.id);
+		console.log(event.eventPhase)
+		//event.stopPropagation();
+		//console.log('mydiv:' + event.cancelable);
+	},true);
+</script>
+</html>
