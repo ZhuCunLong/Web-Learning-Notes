@@ -34,6 +34,11 @@ export default new Router({
       path: '/todolist',
       name: 'todolist',
       component: () => import('@/components/todolist/todolist')
+    },
+    {
+      path: '/imgtest',
+      name: 'imgtest',
+      component: () => import('@/components/imgtest/imgtest')
     }
   ]
 })
