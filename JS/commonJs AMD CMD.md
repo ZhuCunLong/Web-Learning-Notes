@@ -16,5 +16,5 @@ sea.js => CMD
 
 CommonJS、AMD、CMD民间产品
 
-ES 在2015 年发布了ES2016官方标准
+ES 在2015 年发布了ES2015官方标准
 

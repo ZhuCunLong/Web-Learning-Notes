@@ -204,6 +204,8 @@ flex即为常说的弹性布局，是css3的新特性，任何一个容器都可
 
 它可以设为跟`width`或`height`属性一样的值（比如350px），则项目将占据固定空间。
 
+`flex-basis`这个属性在于它可以弹一弹，如果只设置了width，当项目的宽度被内容撑开超过了`width`，项目的宽度不会改变，但是如果设置了`flex-basis`属性，那么它就可以被撑开，**需要注意的是**，`width`优先级高于`flex-basis`
+
 ### flex属性
 
 `flex`属性是`flex-grow`, `flex-shrink` 和 `flex-basis`的简写，默认值为`0 1 auto`。后两个属性可选。
