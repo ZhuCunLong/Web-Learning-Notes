@@ -1,3 +1,83 @@
+# js Array
+
+## 修改器方法
+
+### push（末尾添加）
+
+**功能**：  数组末尾添加任意数量的元素
+
+**返回值**：新数组的长度
+
+**形参**：以逗号隔开需要添加的item
+
+**是否影响原数组**：是
+
+```js
+const arr = ['a', 'b', 'c']
+let count = arr.push('d')
+console.log(count)   // 4
+console.log(arr) // a b c d
+count = arr.push('e','f')
+console.log(count)   // 6
+console.log(arr) // a b c d e f
+```
+
+### pop（末尾删除）
+
+**功能**：  移除数组末尾最后一项
+
+**返回值**：移除项
+
+**形参**：无
+
+**是否影响原数组**：是
+
+```js
+const arr = ['a', 'b', 'c']
+const item = arr.pop()
+console.log(item)  // c
+console.log(arr)  // a b
+```
+
+### unshift（头部添加）
+
+**功能**：与push相对，从数组开头添加新的任意数量的元素
+
+**返回值**：新数组的长度
+
+**形参**：以逗号隔开需要添加的item
+
+**是否影响原数组**：是
+
+```js
+const arr = ['a', 'b', 'c']
+let count = arr.unshift('d')
+console.log(count)   // 4
+console.log(arr) // d a b c
+count = arr.unshift('e','f')
+console.log(count)   // 6
+console.log(arr) // e f d a b c
+```
+
+### shift（头部删除）
+
+**功能**：与pop相对，删除数组中第一个元素
+
+**返回值**：移除项
+
+**形参**：无
+
+**是否影响原数组**：是
+
+```js
+const arr = ['a', 'b', 'c']
+const item = arr.shift()
+console.log(item)   // a
+console.log(arr)    // b c
+```
+
+
+
 | 函数名              | 功能                                                         | 返回值             | 是否影响原数组     |
 | ------------------- | ------------------------------------------------------------ | ------------------ | ------------------ |
 | push                | 数组末尾添加任意数量的元素                                   | 数组长度           | 是                 |
