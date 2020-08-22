@@ -8,7 +8,7 @@ module.exports = {
     // 扩展webpack
     devServer: {
       before(app) {
-        // app其实就是个exoress
+        // app其实就是个express
         app.get('/api/goods', function (req, res) {
           res.json({
             list: [

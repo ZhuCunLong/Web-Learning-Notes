@@ -12,3 +12,20 @@
 | indexOf/lastIndexOf | 从数组开头和结尾查找对应元素的索引                           | 参数的索引值       | **否**             |
 | forEach             | 遍历数组，参数为函数类型，偶默认参数分别为value，index，arr本身 | 无                 | **取决于具体功能** |
 | map                 | 对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。 | 运算后的数组       | **否**             |
+
+遍历数组可以使用for of
+
+```js
+const arr = [{
+    name: 'a',
+    age: 15
+}, {
+    name: 'b',
+    age: 15
+}]
+for(const item of arr){
+    console.log(item.name)
+}
+// a b
+```
+
