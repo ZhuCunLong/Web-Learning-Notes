@@ -23,7 +23,7 @@ console.log(fg.next())
 { value: undefined, done: true }`
 ```
 
-第`7`号代码执行时，不会执行Generator函数firstGenerator中的任何一行代码，`fg`是一个`[Generator]`对象
+第`7`行代码执行时，不会执行Generator函数firstGenerator中的任何一行代码，`fg`是一个`[Generator]`对象
 
 第`9`行代码执行时，首先执行`fg.next()`，这个时候`firstGenerator`中的代码开始执行，直到碰到第一个`yiedld`关键字开始暂停，也就是暂停在第3行（第3行并不**完全**执行），本次`fg.next()`执行结束，而`fg.next()`执行结果的返回值是一个对象`{value:1,done:false}`,第9行执行时先打印'hello generator'，然后打印`fg.next()`返回值的内容。
 
