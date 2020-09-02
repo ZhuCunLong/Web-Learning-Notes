@@ -85,7 +85,7 @@
 </html>
 ```
 
-在看这个例子之前，先将一个dom提供的方法`addEventListener`，这个方法接收三个参数，分别是
+在看这个例子之前，先讲一个dom提供的方法`addEventListener`，这个方法接收三个参数，分别是
 
 - 事件类型(`string`)
 - 事件触发回调函数（`callback function`）
@@ -103,7 +103,7 @@
 
 如果把给`<div>`绑定点击事件的第三个参数改为false，那么对话框会先弹出`hello world`，然后才是`mydiv`。
 
-> 除了`addEventlistener`之外，所有的dom还有一些默认的操作事件，例如的dom的`onClick`属性，通过这种方法绑定的事件会在冒泡阶段触发，同时存在两种方法绑定的事件，依然遵循先手顺序
+> 除了`addEventlistener`之外，所有的dom还有一些默认的操作事件，例如的dom的`onClick`属性，通过这种方法绑定的事件会在冒泡阶段触发，同时存在两种方法绑定的事件，依然遵循先后顺序
 
 >div的点击事件，点击margin区域也会触发
 
