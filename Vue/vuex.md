@@ -46,7 +46,7 @@
 - m2.js
 
   ```js
-  var b = require('./m1')
+  require('./m1')
   var a = require('./state')
   
   console.log(a.foo);
@@ -108,7 +108,24 @@ export default new Vuex.Store({
 })
 ```
 
-在组件中使用
+在main.js中添加store
+
+```js
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+Vue.config.productionTip = false
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
+```
+
+在组件使用
 
 ```vue
 <template>
@@ -254,6 +271,30 @@ methods: {
   handelUpdateName () {
     this.$store.commit('goods/UPDATENAME', 载荷)
   }
+}
+```
+
+### 花式引入modules的方法
+
+当vuex中的模块很多时，你又不想一个一个的import然后写进对象中，可以使用下面的代码解决
+
+```js
+// https://webpack.js.org/guides/dependency-management/#requirecontext
+const modulesFiles = require.context('./modules', true, /\.js$/)
+
+// you do not need `import app from './modules/app'`
+// it will auto require all vuex module from modules file
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  // set './app.js' => 'app'
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const value = modulesFiles(modulePath)
+  modules[moduleName] = value.default
+  return modules
+}, {})
+
+const state = {
+  outA: '外部state中的变量a',
+  outCount: 0
 }
 ```
 
