@@ -54,5 +54,5 @@ npm config list
 >- `package-lock.json`这个文件会保存`node_modules`中所有包的信息(版本、下载地址)
 >  - 这样的话重新`npm install`的时候速度就可以提升
 >- 从文件来看，有一个`lock`称之为锁
->  - 锁定版本号，防治自动升级新版
+>  - 锁定版本号，防止自动升级新版
 

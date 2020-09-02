@@ -140,10 +140,6 @@ patches[0] = [{
 
 # 参考
 
-
-
-# 参考
-
 vue核心之虚拟DOM(vdom) https://www.jianshu.com/p/af0b398602bc 
 
 面试官问: 如何理解Virtual DOM？ https://zhuanlan.zhihu.com/p/79408137 
