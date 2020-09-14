@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作原生dom1</title>
+</head>
+<body>
+
+</body>
+<script>
+    var body = document.getElementsByTagName('body')[0]
+    /*body.innerHTML = `
+        <ul>
+            <li>张三</li>
+            <li>李四</li>
+            <li>王五</li>
+            <li>陈六</li>
+        </ul>
+    `*/
+    var data = ['张三', '李四', '王五', '陈六']
+    var htmlStr = '<ul>'
+    for(item of data){
+        htmlStr += `<li>${item}</li>`
+    }
+    htmlStr += '</ul>'
+    body.innerHTML = htmlStr
+</script>
+</html>

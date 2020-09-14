@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生操作dom2</title>
+</head>
+<body>
+</body>
+<script>
+    var data = ['张三', '李四', '王五', '陈六']
+    var ulDom = document.createElement('ul')
+    var liDom
+    for (item of data) {
+        liDom = document.createElement('li')
+        liDom.innerText = item
+        ulDom.appendChild(liDom)
+    }
+    var body = document.getElementsByTagName('body')[0]
+    body.appendChild(ulDom)
+</script>
+</html>
