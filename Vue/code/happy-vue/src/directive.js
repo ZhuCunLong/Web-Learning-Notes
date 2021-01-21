@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import { addClass, on, debounce } from '@/utils'
+// eslint-disable-next-line no-unused-vars
+import { addClass, on, myDebounce, debounce, throttle } from '@/utils'
 const echarts = require('echarts')
 
 const hover = e => {
@@ -42,9 +43,10 @@ class ResizeHandler {
   }
 
   initListener () {
-    this.$_resizeHandler = debounce(() => {
+    this.$_resizeHandler = throttle(() => {
+      console.log('看看触发了多少次')
       this.resize()
-    }, 100)
+    }, 1000)
     window.addEventListener('resize', this.$_resizeHandler)
 
     this.$_sidebarElm = document.getElementsByClassName('sidebar-container')[0]

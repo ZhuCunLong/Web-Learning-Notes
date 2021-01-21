@@ -119,3 +119,24 @@ export function debounce (func, wait, immediate) {
     return result
   }
 }
+
+export function myDebounce (callback, wait) {
+  let timeout = null
+  return function () {
+    timeout && clearTimeout(timeout)
+    timeout = setTimeout(callback, wait)
+  }
+}
+
+export function throttle (callback, wait) {
+  let canRun = true
+  return function () {
+    if (canRun) {
+      setTimeout(() => {
+        callback()
+        canRun = true
+      }, wait)
+      canRun = false
+    }
+  }
+}
