@@ -134,3 +134,206 @@ new Vue({
 
 ![image-20210118112541263](assets/image-20210118112541263.png)
 
+# vue自定义指令实现echarts初始化
+
+在vue中引用echarts，panjiachen的[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)已经给出了最佳实践，一个图表封装成一个组件，并通过mixin混入窗口大小重置时的图表resize事件。
+
+那么如果想通过自定义指令来实现echarts的初始化，有以下几点需要注意
+
+## 钩子函数的选择
+
+- bind首先排除，bind的触发时机早于dom插入文档，这个时候连ehcarts实例都无法有效的初始化，无法有效的渲染图表
+
+- 然后是inserted，这个时候满足了dom插入的条件，如果是通过静态数据来渲染图表，在inserted中足以实现echarts的渲染，实际项目中，图表数据往往是通过后端异步获取的，根据浏览器的事件循环机制，这时拿到的option可能是没有数据的，或者根本没有option，这和具体的代码实现有关
+- 最优选择是update，当指令传入的binding值发生变化时，会触发，那么将option作为binding的内容传入，当option发生变化时，开始ehars的初始化即可
+
+代码如下：
+
+```js
+import Vue from 'vue'
+// echarts5只能使用require引入？
+const echarts = require('echarts')
+Vue.directive('echarts', {
+  inserted: (el, binding, vnode) => {
+    if (binding.value) {
+      const myChart = echarts.init(el)
+      myChart.setOption(binding.value)
+    }
+  },
+  update: (el, binding, vnode) => {
+    if (binding.value) {
+      const myChart = echarts.init(el)
+      myChart.setOption(binding.value)
+    }
+  }
+})
+```
+
+## ehcarts resize解决方案
+
+### 通过vnode参数操作vue实例属性
+
+可以看到，上述的实现中，不同于一般的在vue中初始化实例，ehchats的实例在钩子函数中生成，也就是vue实例中没有保存ehcarts实例的引用，但是想在使用了`v-echarts`的vue组件中挂载生成的echarts实例也不是不可以，钩子函数的第三个参数vnode传入了指令所在元素的虚拟dom，该对象上有一个属性context，可以获取使用自定义指令所在的vue component，也就是可以使用下面这种方式
+
+```js
+import Vue from 'vue'
+// echarts5只能使用require引入？
+const echarts = require('echarts')
+Vue.directive('echarts', {
+  inserted: (el, binding, vnode) => {
+    if (binding.value) {
+      const myChart = echarts.init(el)
+      myChart.setOption(binding.value)
+      const context = vnode.context
+      context.chart = myChart
+    }
+  },
+  update: (el, binding, vnode) => {
+    if (binding.value) {
+      const myChart = echarts.init(el)
+      myChart.setOption(binding.value)
+      const context = vnode.context
+      context.chart = myChart
+    }
+  }
+})
+```
+
+在myEchartsComponent.vue中可以这样使用
+
+```js
+<template>
+  <div>
+    <div class="echarts-demo" v-echarts="option"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Ldirective',
+  created () {
+    setTimeout(() => {
+      this.option = {
+        title: {
+          text: '第一个 ECharts 实例'
+        },
+        tooltip: {},
+        legend: {
+          data: ['销量']
+        },
+        xAxis: {
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [{
+          name: '销量',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
+        }]
+      }
+    }, 100)
+  },
+  data () {
+    return {
+      option: null,
+      chart: null
+    }
+  }
+}
+</script>
+
+<style scoped lang="less">
+.echarts-demo{
+  width: 100%;
+  height: 500px;
+}
+</style>
+
+```
+
+但是这种感觉会非常奇怪，因为在data中加入一个属性只是为了在指令执行的时候需要使用，开发者并不显式的在vue实例中操作该属性，然后通过在组件中加入混入的方式，来实现窗口resize时图标resize，那使用指令就显得极其鸡肋了，和[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)项目没有太大的区别。指令最方便的使用应该是只提供指令所需的数据，它应该让开发者关注指令在使用时所传入的表达式，而不用去理会后面的处理逻辑，这种做法导致了开发者在使用这个指令时，必须在data返回的对象中加入charts属性，可能文档里面会说“该属性用于保存该组件中初始化的ehcarts实例，你可能会需要用到它”，如果是我只会觉得这个指令真的垃圾，所以这样的解决方案是不能接受的。
+
+### 在指令中完成事件绑定
+
+首先需要实现一个ResizeHandler类
+
+```js
+class ResizeHandler {
+  constructor (chart) {
+    this.$_resizeHandler = null
+    this.chart = chart
+  }
+
+  initListener () {
+    this.$_resizeHandler = debounce(() => {
+      this.resize()
+    }, 1000)
+    window.addEventListener('resize', this.$_resizeHandler)
+  }
+
+  destroyListener () {
+    window.removeEventListener('resize', this.$_resizeHandler)
+    this.chart.dispose()
+    this.chart = null
+  }
+
+  resize () {
+    const { chart } = this
+    chart && chart.resize()
+  }
+}
+```
+
+构造函数接收一个ehcarts实例对象
+
+下面来重写v-echarts指令
+
+```js
+Vue.directive('echarts', {
+  inserted: (el, binding, vnode) => {
+    if (binding.value.option) {
+      // 创建新的resizeHandler操作类
+      const myChart = echarts.init(el)
+      myChart.setOption(binding.value.option)
+      const resizeHandler = new ResizeHandler(myChart)
+      resizeHandler.initListener()
+      vnode.context[`$${binding.value.id}ResizeHandler`] = resizeHandler
+    }
+  },
+  update: (el, binding, vnode) => {
+    // 已经初始化过,当option更新时只需要重新调用setOption方法初始化图表
+    if (vnode.context[`$${binding.value.id}ResizeHandler`]) {
+      if (binding.value.option) {
+        const resizeHandler = vnode.context[`$${binding.value.id}ResizeHandler`]
+        resizeHandler.chart.setOption(binding.value.option)
+      }
+    } else if (binding.value.option) {
+      // 非首次初始化，创建新的resizeHandler操作类
+      const myChart = echarts.init(el)
+      myChart.setOption(binding.value.option)
+      const resizeHandler = new ResizeHandler(myChart)
+      resizeHandler.initListener()
+      vnode.context[`$${binding.value.id}ResizeHandler`] = resizeHandler
+    }
+  },
+  unbind: (el, binding, vnode) => {
+    vnode.context[`$${binding.value.id}ResizeHandler`] && vnode.context[`$${binding.value.id}ResizeHandler`].destroyListener()
+  }
+})
+```
+
+改变了binding传入的参数类型
+
+使用方法如下：
+
+```vue
+<template>
+  <div>
+    <div class="echarts-demo" v-echarts="{option: option, id: 'first'}"></div>
+    <div class="echarts-demo" v-echarts="{option: option1, id: 'second'}"></div>
+  </div>
+</template>
+```
+
+可以看到这里将指令传入的值由原来的option修改为了一个带id的对象，带id是为了防止当一个vue组件需要多个ehcarts图表时，在vue指令中可以通过在组件实例中绑定不同的属性名，并且不用在组件的data方法中显式地声明，最重要的是，在unbind钩子函数执行（组件销毁）时，能够知道销毁的是哪一个ehcarts的resizeHandler实例对象，那么到这个地方，echarts的vue指令实现版已经完成，可以发现，相比[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)项目，将resize事件和echarts销毁全部放在了指令中实现，只需要修改option就可以实现echarts的初始化
+

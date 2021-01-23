@@ -8,8 +8,8 @@
     <el-input v-model="input1" v-focus/>
     <el-input v-focus/>
     <el-button type="primary" size="mini" @click="handleClick">确定</el-button>
-    <div class="echarts-demo" v-echarts="option"></div>
-    <div class="echarts-demo" v-echarts="option1"></div>
+    <div class="echarts-demo" v-echarts="{option, id: 'first'}"></div>
+    <div class="echarts-demo" v-echarts="{option: option1, id: 'second'}"></div>
   </div>
 </template>
 
@@ -71,6 +71,42 @@ export default {
         }]
       }
     }, 100)
+    /* this.option = {
+      title: {
+        text: '第一个 ECharts 实例'
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    }
+    this.option1 = {
+      title: {
+        text: '第二个 ECharts 实例'
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 100]
+      }]
+    } */
   },
   data () {
     return {
@@ -85,6 +121,7 @@ export default {
   methods: {
     handleClick () {
       this.demo = 'change'
+      this.option = this.option1
     }
   }
 }
