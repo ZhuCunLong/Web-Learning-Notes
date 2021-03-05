@@ -60,6 +60,33 @@ export const constantRoutes = [
         icon: 'el-icon-menu'
       }
     }]
+  },
+  {
+    path: '/learn2',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'playWatch',
+    meta: {
+      title: '双绑/watch',
+      icon: 'el-icon-menu'
+    },
+    children: [{
+      path: 'play-watch',
+      component: () => import('@/views/play-watch'),
+      name: 'playWatch0',
+      meta: {
+        title: '对象绑定',
+        icon: 'el-icon-menu'
+      }
+    }, {
+      path: 'play-watch1',
+      component: () => import('@/views/play-watch/test1'),
+      name: 'playWatch1',
+      meta: {
+        title: '数组绑定',
+        icon: 'el-icon-menu'
+      }
+    }]
   }
 ]
 
