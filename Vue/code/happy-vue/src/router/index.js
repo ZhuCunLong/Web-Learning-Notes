@@ -46,6 +46,20 @@ export const constantRoutes = [
         icon: 'el-icon-menu'
       }
     }]
+  },
+  {
+    path: '/learn1',
+    component: Layout,
+    redirect: '/learn1/static-class',
+    children: [{
+      path: 'static-class',
+      component: () => import('@/views/staticClass'),
+      name: 'staticClass',
+      meta: {
+        title: 'Class静态方法',
+        icon: 'el-icon-menu'
+      }
+    }]
   }
 ]
 

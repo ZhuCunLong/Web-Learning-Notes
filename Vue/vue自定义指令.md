@@ -169,6 +169,16 @@ Vue.directive('echarts', {
 })
 ```
 
+在模板中使用
+
+```vue
+<template>
+  <div>
+    <div class="echarts-demo" v-echarts="option"></div>
+  </div>
+</template>
+```
+
 ## ehcarts resize解决方案
 
 ### 通过vnode参数操作vue实例属性
@@ -201,7 +211,7 @@ Vue.directive('echarts', {
 
 在myEchartsComponent.vue中可以这样使用
 
-```js
+```vue
 <template>
   <div>
     <div class="echarts-demo" v-echarts="option"></div>
@@ -265,6 +275,7 @@ class ResizeHandler {
   }
 
   initListener () {
+    // 这里的debounce是防抖函数的封装
     this.$_resizeHandler = debounce(() => {
       this.resize()
     }, 1000)
