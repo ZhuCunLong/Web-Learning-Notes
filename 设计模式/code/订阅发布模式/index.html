@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订阅/发布模式</title>
+</head>
+<body>
+<button id="addNewObserver">添加观察者checkBox</button>
+<input id="mainCheckbox" type="checkbox"/>
+<div id="observersContainer"></div>
+<script src="PubSub.js"></script>
+</body>
+<script>
+	const controlCheckbox = document.getElementById('mainCheckbox')
+	const addBtn = document.getElementById('addNewObserver')
+	const container = document.getElementById('observersContainer')
+	const pubSub = new PubSub()
+	controlCheckbox.onclick = () => {
+		pubSub.publish('onChange', controlCheckbox.checked)
+	}
+
+	function AddNewObserver() {
+		// 具体观察者 ConcreteObserver
+		const check = document.createElement('input')
+		check.type = 'checkbox'
+
+		pubSub.subscribe('onChange', checked => {
+			check.checked = checked
+		})
+
+		container.appendChild(check)
+	}
+
+	addBtn['onclick'] = AddNewObserver
+</script>
+</html>

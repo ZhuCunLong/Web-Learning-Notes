@@ -37,7 +37,7 @@ class ObserverList{
 	IndexOf (obj, startIndex){
 		let i = startIndex, pointer = -1
 		while(i<this.observerList.length){
-			if(this.observerList.length){
+			if(this.observerList[i] === obj){
 				pointer = i
 			}
 			i++
