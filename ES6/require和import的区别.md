@@ -39,7 +39,7 @@ module.exports = {
     console.log('ccc')
   },
   d:{
-    foo：bar
+    foo: bar
   }
 }
 ```
@@ -84,7 +84,7 @@ c()
 console.log(d.foo)
 
 //等价=> 
-import * as test form './testesmodule'
+import * as test from './testesmodule'
 console.log(test.a)
 console.log(test.b)
 test.c()
