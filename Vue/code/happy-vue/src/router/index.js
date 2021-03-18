@@ -87,6 +87,25 @@ export const constantRoutes = [
         icon: 'el-icon-menu'
       }
     }]
+  },
+  {
+    path: '/learn3',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'playAsync',
+    meta: {
+      title: '异步事件',
+      icon: 'el-icon-menu'
+    },
+    children: [{
+      path: 'play-async1',
+      component: () => import('@/views/play-async'),
+      name: 'playAsync1',
+      meta: {
+        title: '异常处理',
+        icon: 'el-icon-menu'
+      }
+    }]
   }
 ]
 
