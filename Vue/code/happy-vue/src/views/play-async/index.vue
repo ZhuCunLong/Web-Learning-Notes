@@ -1,9 +1,23 @@
 <template>
-  <div style="height: 100%">
+  <div style="height: 100%;padding: 10px">
     <div class="main">
       <div class="left">
-        <el-button @click="handleStart">启动</el-button>
-        <el-button @click="handleStart1">启动1</el-button>
+        <div class="demo-item">
+          <el-button size="mini" @click="handleStart">启动</el-button>
+          <span>内外层都捕获异常</span>
+        </div>
+        <div class="demo-item">
+          <el-button size="mini" @click="handleStart1">启动</el-button>
+          <span>点击事件中弹框</span>
+        </div>
+        <div class="demo-item">
+          <el-button size="mini" @click="handleStart2">启动</el-button>
+          <span>不捕获异常</span>
+        </div>
+        <div class="demo-item">
+          <el-button size="mini" @click="handleStart3">启动</el-button>
+          <span>不加async/await</span>
+        </div>
         <my-dialog :visible.sync="visible"></my-dialog>
       </div>
       <div class="right">
@@ -12,6 +26,8 @@
       <div class="result">
         <p>1.当内层函数的异常被捕获之后，外层函数不会继续捕获该异常，除非内层函数没做异常捕获</p>
         <p>2.当在点击事件中唤起弹框时，并不会阻塞点击事件的执行！</p>
+        <p>3.不捕获异常时，会阻塞程序执行，浏览器控制台会报错</p>
+        <p>4.不加async/await，就变成了正常的promise但是不会执行then和catch</p>
       </div>
     </div>
   </div>
@@ -93,6 +109,13 @@ export default {
   .left, .right{
     width: 50%;
     height: 100%;
+  }
+  .left{
+    .demo-item{
+      &+.demo-item{
+        padding-top: 10px;
+      }
+    }
   }
   .result{
     padding: 10px;
