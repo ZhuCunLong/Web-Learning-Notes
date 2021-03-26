@@ -125,3 +125,11 @@ let readfile = _fs.readfile;
 而es6模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量，从这个角度上来看，es6的模块化效率要比CommonJS高得多。阮一峰大神在文档中还列举了一些静态加载的其他优点，但是本菜b并不能看懂╮(╯▽╰)╭
 
 > **新的思考**：`fs`是node.js的核心模块，为什么es6的模块化语法能够生效，在ws中通过文件定位，发现node.js的核心模块代码全是用ts写的，但是由于对ts语法不太熟悉，无法理解ts是如何能够做到既兼容CommonJS又兼容es6的。
+
+## 其他区别
+
+1. CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
+2. CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
+3. CommonJs 是单个值导出，ES6 Module可以导出多个
+4. CommonJs 是动态语法可以写在判断里，ES6 Module 静态语法只能写在顶层
+5. CommonJs 的 this 是当前模块，ES6 Module的 this 是 undefined
