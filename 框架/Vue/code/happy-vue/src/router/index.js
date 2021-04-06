@@ -106,6 +106,25 @@ export const constantRoutes = [
         icon: 'el-icon-menu'
       }
     }]
+  },
+  {
+    path: '/learn4',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'ImgUtils',
+    meta: {
+      title: '图片操作',
+      icon: 'el-icon-menu'
+    },
+    children: [{
+      path: 'img-utils1',
+      component: () => import('@/views/img-utils'),
+      name: 'ImgUtils1',
+      meta: {
+        title: '图片截取',
+        icon: 'el-icon-menu'
+      }
+    }]
   }
 ]
 
