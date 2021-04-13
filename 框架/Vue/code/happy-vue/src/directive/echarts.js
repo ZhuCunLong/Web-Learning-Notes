@@ -1,33 +1,8 @@
 import Vue from 'vue'
 // eslint-disable-next-line no-unused-vars
 import { addClass, on, myDebounce, debounce, throttle } from '@/utils'
+
 const echarts = require('echarts')
-
-const hover = e => {
-  const t = e.target
-  t.title = t.clientWidth < t.scrollWidth ? t.innerText : ''
-}
-
-Vue.directive('focus', {
-  bind: (el) => {
-    console.log('全局注册')
-  },
-  // 当被绑定的元素插入到 DOM 中时……
-  inserted: function (el) {
-    // 聚焦元素
-    el.focus()
-  }
-})
-
-Vue.directive('ellipsis', {
-  bind: function (el, binding) {
-    addClass(el, 'l-ellipsis')
-    on(el, 'mouseenter', hover)
-  },
-  update: function (el) {
-    // console.log(el)
-  }
-})
 
 class ResizeHandler {
   constructor (chart) {

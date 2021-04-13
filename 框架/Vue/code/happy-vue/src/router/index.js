@@ -124,6 +124,14 @@ export const constantRoutes = [
         title: '图片截取',
         icon: 'el-icon-menu'
       }
+    }, {
+      path: 'img-utils2',
+      component: () => import('@/views/img-utils/img-fit'),
+      name: 'ImgUtils2',
+      meta: {
+        title: '图片自适应',
+        icon: 'el-icon-menu'
+      }
     }]
   }
 ]
