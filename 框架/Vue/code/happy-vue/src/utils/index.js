@@ -140,3 +140,35 @@ export function throttle (callback, wait) {
     }
   }
 }
+
+export class ResizeHandler {
+  constructor (resizeEvent) {
+    this.$_sidebarElm = null
+    this.$_resizeHandler = null
+    this.resize = resizeEvent
+  }
+
+  // eslint-disable-next-line camelcase
+  $_sidebarResizeHandler = e => {
+    if (e.propertyName === 'width') {
+      this.$_resizeHandler()
+    }
+  }
+
+  initListener () {
+    this.$_resizeHandler = debounce(() => {
+      this.resize()
+    }, 500)
+    window.addEventListener('resize', this.$_resizeHandler)
+
+    this.$_sidebarElm = document.getElementsByClassName('h-page-menu')[0]
+    this.$_sidebarElm && this.$_sidebarElm.addEventListener('transitionend', this.$_sidebarResizeHandler)
+  }
+
+  destroyListener () {
+    window.removeEventListener('resize', this.$_resizeHandler)
+    this.$_resizeHandler = null
+
+    this.$_sidebarElm && this.$_sidebarElm.removeEventListener('transitionend', this.$_sidebarResizeHandler)
+  }
+}

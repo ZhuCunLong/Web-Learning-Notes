@@ -133,6 +133,25 @@ export const constantRoutes = [
         icon: 'el-icon-menu'
       }
     }]
+  },
+  {
+    path: '/learn5',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'PlayCanvas',
+    meta: {
+      title: 'canvas相关',
+      icon: 'el-icon-menu'
+    },
+    children: [{
+      path: 'play-canvas',
+      component: () => import('@/views/play-canvas'),
+      name: 'PlayCanvas',
+      meta: {
+        title: '画板',
+        icon: 'el-icon-menu'
+      }
+    }]
   }
 ]
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>wujiao</title>
+    <defs>
+        <polygon id="path-1" points="4 11 12 3 20 11 18 19 6 19"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="16" height="16" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="wujiao" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="2,1" stroke-opacity="0.4">
+        <use id="juxing" stroke="#000000" mask="url(#mask-2)" stroke-width="2" fill="#EAEAEA" xlink:href="#path-1"></use>
+    </g>
+</svg>
