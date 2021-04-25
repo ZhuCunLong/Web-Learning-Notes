@@ -10,6 +10,11 @@
     <div>
       <img :src="handleSrc" height="100">
     </div>
+    <div
+      v-for="(item,index) in urls"
+      :key="index">
+      <img :src="item">
+    </div>
   </div>
 </template>
 
@@ -22,7 +27,8 @@ export default {
     return {
       imgSrc: logo,
       handleSrc: null,
-      defaultImg
+      defaultImg,
+      urls: []
     }
   },
   async created () {
@@ -37,7 +43,7 @@ export default {
     }).then(res => {
       this.canvasUrl = res
     }) */
-    try {
+    /* try {
       this.handleSrc = await this.handleImg({
         src: this.imgSrc,
         rect: {
@@ -50,6 +56,31 @@ export default {
     } catch (err) {
       console.error(err)
       this.handleSrc = this.defaultImg
+    } */
+    try {
+      this.urls = await this.handleImg2({
+        src: this.imgSrc,
+        rect: [{
+          x: 0,
+          y: 50,
+          width: 50,
+          height: 50
+        }, {
+          x: 50,
+          y: 50,
+          width: 50,
+          height: 50
+        }, {
+          x: 0,
+          y: 100,
+          width: 100,
+          height: 100
+        }]
+      })
+      console.log(this.urls)
+    } catch (err) {
+      console.error(err)
+      this.urls = []
     }
   },
   methods: {
@@ -96,12 +127,24 @@ export default {
         img.onload = function () {
           const canvas = document.createElement('canvas')
           const ctx = canvas.getContext('2d')
-          const { x, y, width, height } = rect
-          canvas.width = width
-          canvas.height = height
-          ctx.drawImage(this, x, y, width, height, 0, 0, width, height)
-          const url = canvas.toDataURL('image/png')
-          resolve(url)
+          if (Array.isArray(rect)) {
+            const urls = []
+            rect.forEach(item => {
+              const { x, y, width, height } = item
+              canvas.width = width
+              canvas.height = height
+              ctx.drawImage(this, x, y, width, height, 0, 0, width, height)
+              urls.push(canvas.toDataURL('image/png'))
+            })
+            resolve(urls)
+          } else {
+            const { x, y, width, height } = rect
+            canvas.width = width
+            canvas.height = height
+            ctx.drawImage(this, x, y, width, height, 0, 0, width, height)
+            const url = canvas.toDataURL('image/png')
+            resolve(url)
+          }
         }
         img.onerror = function (err) {
           reject(err)
