@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>juxing</title>
+    <defs>
+        <rect id="path-1" x="4" y="6" width="16" height="12"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="16" height="12" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="juxing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="2,1" stroke-opacity="0.4">
+        <use id="矩形" stroke="#000000" mask="url(#mask-2)" stroke-width="2" fill="#EAEAEA" xlink:href="#path-1"></use>
+    </g>
+</svg>
