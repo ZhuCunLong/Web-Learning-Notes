@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计时器</title>
+    <script src="https://cdn.bootcss.com/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.20.1/locale/zh-cn.js"></script>
+</head>
+<body>
+<div id="time" style="font-size: 60px"></div>
+<button onClick="console.log('hello')">test</button>
+<button onclick="loop()">loop</button>
+</body>
+<script>
+  function fn(n){
+    if(n < 0){
+      return
+    }
+    if(n < 2) {
+      return n
+    }
+    return fn(n-1) + fn(n-2)
+  }
+
+  const ele = document.getElementById('time')
+  function loop(){
+    console.log(fn(40))
+  }
+    /*function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+    const ele = document.getElementById('time')
+    ele.innerText = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    setInterval(() => {
+      ele.innerText = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    }, 1000)
+
+
+    setInterval(() => {
+      const start = new Date()
+      console.log(fn(40))
+      const end = new Date()
+      console.log((end-start)/1000)
+    }, 1000)
+
+
+
+    setInterval(async () => {
+      const start = new Date()
+      // console.log('宏')
+      await sleep(3000)
+      const end = new Date()
+      console.log((end-start)/1000)
+    }, 1000)
+
+    async function go(){
+      const start = new Date()
+      await sleep(3000)
+      const end = new Date()
+      console.log((end-start)/1000)
+    }
+
+    go()*/
+
+</script>
+</html>
