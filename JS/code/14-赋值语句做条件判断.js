@@ -9,5 +9,6 @@ function a(b = 'nice'){
     console.log(b)
 }
 console.log(b)
-a(c='gg')
+let c
+a(c='gg1')
 console.log(c)
