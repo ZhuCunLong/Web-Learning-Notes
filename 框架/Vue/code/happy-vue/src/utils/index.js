@@ -128,6 +128,14 @@ export function myDebounce (callback, wait) {
   }
 }
 
+export function vueDebounce (callback, wait) {
+  let timeout = null
+  return function () {
+    timeout && clearTimeout(timeout)
+    timeout = setTimeout(callback, wait)
+  }
+}
+
 export function throttle (callback, wait) {
   let canRun = true
   return function () {
