@@ -1,6 +1,8 @@
 # loader
 
-## babel-loader
+## 常用loader
+
+### babel-loader
 
 - 依赖：
   - babel-loader
@@ -23,7 +25,7 @@ module:{
 }
 ```
 
-### 相关插件
+#### 相关插件
 
 - @babel/preset-env 只能转换基本语法，如promise不能转换
 
@@ -64,7 +66,84 @@ module:{
   }
   ```
 
-## postcss-loader
+### postcss-loader
 
 对css文件做兼容性处理
+
+## loder实现
+
+loder本质上是一个函数，用来处理文件
+
+详细demo见code目录
+
+- 默认方法，包含三个参数，倒序执行
+
+```js
+module.exports = function (content, map, meta) {
+	console.log('1111')
+	console.log('content:', content)
+	console.log('map:', map)
+	console.log('meta:', meta)
+	return content
+}
+```
+
+- pitch方法，顺序执行
+
+```js
+module.exports.pitch = function () {
+	console.log('1111')
+}
+```
+
+### 同步/异步loader
+
+- 同步方式
+
+上述是一种同步loader的实现方式，下面介绍第二种
+
+```js
+module.exports = function (content, map, meta) {
+	console.log('1111')
+	console.log('content:', content)
+	console.log('map:', map)
+	console.log('meta:', meta)
+  // 第一个参数为错误信息
+	this.callback(null, content, map, meta)
+}
+```
+
+- 异步方式
+
+  推荐使用这种方式来实现loader？
+
+```js
+module.exports = function (content, map, meta) {
+  const callback = this.async()
+  setTimeout(() => {
+    console.log('1111')
+    console.log('content:', content)
+    console.log('map:', map)
+    console.log('meta:', meta)
+    callback(null, content)
+  })
+}
+```
+
+### 获取loader的option
+
+使用`loader-utils`插件，但是我发现`this`上本身就有一个getOptions方法，很奇怪
+
+```js
+const { getOptions } = require('loader-utils')
+module.exports = function (content, map, meta) {
+ console.log('3333')
+ console.log(this.getOptions())
+ const options = getOptions(this)
+ console.log(333, options)
+ return content
+}
+```
+
+### 实战：实现babel-loader
 
