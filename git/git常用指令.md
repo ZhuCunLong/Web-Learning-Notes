@@ -10,13 +10,23 @@
 
   把文件添加到暂存区
 
-- git commit -m "`info`"
+- git commit
+
+  - git commit -m "`info`"
 
   将暂存区的修改提交文件到本地分支，同时绑定提交信息
 
-  git commit -a
+  - git commit -a
 
   可以不同git add直接commit代码，仅限修改和删除文件，新增文件还是要add
+
+  - git commit --amend
+
+    在commit还没有被push到远端之前，可以用这个指令修改上一次的提交message
+
+    如果commit已经提交到远端，在push时可以使用`--force-with-lease`指令
+
+    `git push --force-with-lease origin master`
 
 - git status
 
@@ -33,6 +43,18 @@
   git reset --hard head^:回退到上一个版本
 
   git reset --hard [versionid]: 回退到`versionid`的指定版本，版本号不需要写全，git会自动去找，但是为了防止找到多个，还是要多写几位
+  
+- git stash
+
+  保存当前工作区的内容，将工作区状态清空保留至上一次commit的状态
+
+  - git stash apply
+
+  恢复stash中的第一个stash，但是stash记录并不清除
+
+  - git stash pop
+
+  恢复stash列表中的第一个stash，并清除stash列表中的记录
 
 ## 分支管理
 
@@ -44,7 +66,7 @@
 
     `remote name`：远端主机名，一般是origin
 
-    `branch name`：本地分支名
+    `branch name`：本地分支名，如果远端不存在该分支，会自动创建
     
   - git push  [remote name] :[remote branch]
 
@@ -73,6 +95,8 @@
   - git branch --set-upstream-to=[remote name]/[remote branch] [local branch]
 
     设置本地分支与远端分支的关联
+    
+  - git branch -d [loacal name]
 
 - `git checkout`
 
@@ -85,6 +109,20 @@
   - `git checkout [branch name]`
 
     切换本地分支
+  
+- `git switch`
+
+  - git switch [loacal branch]
+
+    切换到本地分支
+
+  - git switch -c [local branch]
+
+    创建并切换
+
+- git merge [local branch]
+
+  将本地分支合并到当前分支
 
 ## 常见报错
 
@@ -115,3 +153,4 @@ warning: branch.master.remote has multiple values
   ![image-20210613234923029](assets/image-20210613234923029.png)
 
 会发现[baranch "master"]的数据有多组，只保留一组即可，然后再使用`git push -u`或者`git branch --set-upstream-to`来设置远端分支与本地分支的映射关系
+
