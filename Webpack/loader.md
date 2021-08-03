@@ -6,7 +6,7 @@
 
 - 依赖：
   - babel-loader
-  -  @babel/core 
+  - @babel/core 
 - 功能，对js文件做兼容处理，可配合@babe/preset-env等插件(？)
 
 ```js
