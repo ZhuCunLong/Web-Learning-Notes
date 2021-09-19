@@ -98,6 +98,8 @@
     
   - git branch -d [loacal name]
 
+    删除本地分支
+
 - `git checkout`
 
   - `git checkout -b [branch name]`
