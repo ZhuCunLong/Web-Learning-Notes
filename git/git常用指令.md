@@ -98,6 +98,8 @@
     
   - git branch -d [loacal name]
 
+    删除本地分支
+
 - `git checkout`
 
   - `git checkout -b [branch name]`
@@ -109,6 +111,10 @@
   - `git checkout [branch name]`
 
     切换本地分支
+    
+  - `get checkout -b [branch name] [remote name]/[remote branch]`
+  
+    从远端根据[remote branch]拉取新的本地分支
   
 - `git switch`
 
