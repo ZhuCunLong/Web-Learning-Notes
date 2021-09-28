@@ -13,7 +13,7 @@ let res = 0
 const handleProgress = () => {
   res = parseInt((min + max) /2 )
   console.log('中位数为', res)
-  console.log('请选择大还是小。大：1 小：0')
+  console.log('请选择大还是小。大：1 小：2')
 }
 console.log('请输入范围')
 rl.on('line', function(line){
@@ -24,13 +24,13 @@ rl.on('line', function(line){
     handleProgress()
 	} else if(cur_line > 0){
     const choice = Number(line)
-    if(choice === 2){
+    if(choice === 3){
       cur_line = 0
       min = 0,max = 0
       console.log('请输入范围')
       return 
     }
-    if(choice === 0){
+    if(choice === 2){
       min = res
     } else {
       max = res
