@@ -1,32 +1,28 @@
 <template>
-  <div>
-    <h2>{{`id: ${verto.id}`}}</h2>
-    <h2>{{`name: ${verto.name}`}}</h2>
-    <h2>{{`age: ${verto.age}`}}</h2>
-    <br>
-    <child-class/>
+  <div class="container">
+    <el-button @click="handleClick(1)">切换类型1</el-button>
+    <el-button @click="handleClick(2)">切换类型2</el-button>
+    <child-ant-table :tableType="type" :tableData="tableData"/>
   </div>
 </template>
 
 <script>
-import Verto from '@/utils/verto'
-import ChildClass from '@/views/staticClass/child-class'
+import ChildAntTable from './child-ant-table.vue'
+import { data } from './config'
+
 export default {
   name: 'LStaticClass',
-  components: { ChildClass },
+  components: { ChildAntTable },
   data () {
     return {
-      verto: null
+      type: 2,
+      tableData: data
     }
   },
-  created () {
-    this.verto = Verto.getInstance({
-      id: 6666,
-      name: 'zcl',
-      age: '15'
-    })
-  },
   methods: {
+    handleClick (type) {
+      this.type = type
+    }
   }
 }
 </script>
