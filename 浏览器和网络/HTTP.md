@@ -64,21 +64,6 @@ HTTP协议中定义了浏览器和服务器进行交互的不同方法，基本�
 
 ## http常见请求头
 
-### 跨域
-
-- Access-Control-Allow-Origin: *
-  - 允许所有来源访问
-- Access-Control-Allow-Method: POST,GET
-  - 允许访问的方式
-- Access-Control-Allow-Headers: Content-type, Authorization, Accept
-  - 允许携带的头部
-- Access-Control-Allow-Credentials: true
-  - 该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为`true`，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为`true`，如果服务器不要浏览器发送Cookie，删除该字段即可。
-- Access-Control-Max-Age: 5
-  - 该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是5s，即允许缓存该条回应5秒，在此期间，不用发出另一条预检请求。
-
-> 注：以上头部都是响应头部
-
 ### 缓存
 
 - expires
@@ -98,6 +83,19 @@ HTTP协议中定义了浏览器和服务器进行交互的不同方法，基本�
 - Last-Modified
 
   对应请求头中的If-Modified-Since字段
+
+### 跨域
+
+- Access-Control-Allow-Origin: *
+  - 允许所有来源访问
+- Access-Control-Allow-Method: POST,GET
+  - 允许访问的方式
+- Access-Control-Allow-Headers: Content-type, Authorization, Accept
+  - 允许携带的头部
+- Access-Control-Allow-Credentials: true
+  - 该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为`true`，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为`true`，如果服务器不要浏览器发送Cookie，删除该字段即可。
+- Access-Control-Max-Age: 5
+  - 该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是5s，即允许缓存该条回应5秒，在此期间，不用发出另一条预检请求。
 
 ## http缓存机制
 

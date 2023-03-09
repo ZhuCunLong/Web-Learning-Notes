@@ -107,3 +107,38 @@
 
 >div的点击事件，点击margin区域也会触发
 
+## 实战应用
+
+阻止冒泡
+
+- stopPropagation
+
+```jsx
+function CompoentA = () => {
+  return (
+    <>
+    	<div onClick={()=>console.log('点击div')}>
+      	<Button onClick={()=>console.log('点击button')}></Button>
+    	</div>
+    </>
+  )
+}
+```
+
+如果只想触发点击button而不想触发点击div，则改造如下
+
+```jsx
+function CompoentA = () => {
+  return (
+    <>
+    	<div onClick={()=>console.log('点击div')}>
+      	<Button onClick={(e)=> {
+          e.stopPropagation()
+          console.log('点击button')
+        }}></Button>
+    	</div>
+    </>
+  )
+}
+```
+
