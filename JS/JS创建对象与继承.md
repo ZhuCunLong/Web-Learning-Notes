@@ -122,7 +122,7 @@ var p2 = new Person('zcl', 24, 'male');
 
 我们创建的每个函数都有一个prototype属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法
 
-> 注意：prototype是函数特有的属性，实例对象是没有prototype属性的，但是有\_\_proto__属性指向父类函数的prototype属性
+> 注意：prototype是函数特有的属性，实例对象是没有prototype属性的，但是有\_\_proto__属性指向构造函数的prototype属性
 
 ### 原型模式实现
 

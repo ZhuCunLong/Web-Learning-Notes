@@ -95,7 +95,7 @@ document.querySelector(".content").innerHTML=html; //<p>123</p>
    - 禁止执行内联脚本和未授权的脚本
    - 还提供了上报机制，这样可以帮助我们尽快发现有哪些 XSS 攻击，以便尽快修复问题
 
-   【启用CSP的两周方法】
+   【启用CSP的两种方法】
 
    1、HTTP 响应头 **Content-Security-Policy**
 
